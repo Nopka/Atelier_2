@@ -79,7 +79,7 @@ class CommentController{
                   "id" => $id,
                   "event" => $idEvent,
                   "user" => $idUser,
-                  "id" => $id,
+                  "content" => $content,
                   "created" => $currentDateTime,
                   "updated" => $currentDateTime
                ]
