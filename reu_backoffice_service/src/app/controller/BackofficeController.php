@@ -12,7 +12,7 @@ use Ramsey\Uuid\Uuid;
 
 
 
-class EventController
+class BackofficeController
 {
     private $c;
 
@@ -21,5 +21,8 @@ class EventController
         $this->c = $c;
     }
 
-   
+    function deleteUser(Request $req, Response $resp, array $args):Reposne{
+        
+
+    }
 }
