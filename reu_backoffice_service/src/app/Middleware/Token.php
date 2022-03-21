@@ -23,8 +23,7 @@ class Token
     {
 
         //check si le token se trouve dans l'uri
-        $token = null;
-        $token = $rq->getQueryParams()['token'];
+        $token = $rq->getQueryParams()['token'] ?? null;
 
         if (is_null($token)) {
             //check si le token se trouve dans un header applicatif

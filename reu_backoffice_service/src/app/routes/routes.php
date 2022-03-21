@@ -1,13 +1,12 @@
 <?php
 //Routes de l'API
 
-use \reu\events\app\controller\EventController;
-use \reu\events\app\middleware\Middleware;
-use \reu\events\app\middleware\Token;
-use \DavidePastore\Slim\Validation\Validation as Validation ;
+use \reu\backoffice\app\controller\BackofficeController;
+use \reu\backoffice\app\middleware\Middleware;
+use \reu\backoffice\app\middleware\Token;
 
 
-$app->post('/events[/]',EventController::class. ':insertEvent')->setName('insertEvent')->add(middleware::class. ':putIntoJson');
+$app->delete('/events/{id}[/]',BackofficeController::class. ':deleteEvent')->setName('deleteEvent')->add(middleware::class. ':putIntoJson')->add(Token::class. ':check');
 
 
 
