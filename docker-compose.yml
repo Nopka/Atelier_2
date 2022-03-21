@@ -1,0 +1,137 @@
+
+version: '3'
+networks:
+  reu.net:
+    driver: bridge
+services:
+#####################################################
+# API SERVICES
+#####################################################
+
+
+  # service api.events : api frontoffice pour la gestion des evenements
+  api.events:
+    image: 'canals/php:latest'
+    environment:
+      - VHOST_HOSTNAME=api.events.local
+      - VHOST_DOCROOT=/var/www/public
+    ports:
+      - '19080:80'
+      - '19043:443'
+    volumes:
+      - './reu_events_service/public:/var/www/public'
+      - './reu_events_service/src:/var/www/src'
+    working_dir: /var/www/src
+    networks:
+      - reu.net
+    depends_on:
+      - mysql.events
+
+
+  # service api.suivi.authentification : api backoffice pour l'autentification
+  api.authentication:
+    image: 'canals/php:latest'
+    environment:
+      - VHOST_HOSTNAME=api.authentification.local
+      - VHOST_DOCROOT=/var/www/public
+    ports:
+      - '19090:80'
+      - '19044:443'
+    volumes:
+      - './reu_authentification_service/public:/var/www/public'
+      - './reu_authentification_service/src:/var/www/src'
+    working_dir: /var/www/src
+    networks:
+      - reu.net
+    depends_on:
+      - mysql.users
+  
+
+  # service api.suivi.comments : api front-office pour le suivi des commentaires
+  api.comments:
+    image: 'canals/php:latest'
+    environment:
+      - VHOST_HOSTNAME=api.comments.local
+      - VHOST_DOCROOT=/var/www/public
+    ports:
+      - '19070:80'
+      - '19045:443'
+    volumes:
+      - './reu_comments_service/public:/var/www/public'
+      - './reu_comments_service/src:/var/www/src'
+    working_dir: /var/www/src
+    networks:
+      - reu.net
+    depends_on:
+      - mysql.events
+  
+
+  
+  api.backoffice:
+    image: 'canals/php:latest'
+    environment:
+      - VHOST_HOSTNAME=api.backoffice.local
+      - VHOST_DOCROOT=/var/www/pub
+    ports:
+      - '20080:80'
+      - '20043:443'
+    volumes:
+      - './reu_backoffice_service/pub:/var/www/pub'
+      - './reu_backoffice_service/src:/var/www/src'
+      - './reu_backoffice_service/log:/var/log/app'
+    working_dir: /var/www/src
+    networks:
+      reu.net:
+        aliases:
+          - api.backoffice.local
+    depends_on:
+      - mysql.events
+      - mysql.users
+
+
+
+  # service sql pour le stockage des events -
+  # utilisé par l'api  events et l'api comments
+  mysql.events:
+    image: 'mariadb:latest'
+    command: '--default-authentication-plugin=mysql_native_password --character-set-server=utf8 --collation-server=utf8_general_ci'
+    environment:
+      - MYSQL_ROOT_PASSWORD=comroot
+      - MYSQL_USER=events_reu
+      - MYSQL_PASSWORD=events_reu
+      - MYSQL_DATABASE=events_reu
+    ports:
+      - '3307:3306'
+    networks:
+      - reu.net
+    volumes:
+      - './reu_events_service/sql:/var/sql'
+
+
+  # service sql pour le stockage des users -
+  # utilisé par l'api users 
+  mysql.users:
+    image: 'mariadb:latest'
+    command: '--default-authentication-plugin=mysql_native_password --character-set-server=utf8 --collation-server=utf8_general_ci'
+    environment:
+      - MYSQL_ROOT_PASSWORD=comroot
+      - MYSQL_USER=users_reu
+      - MYSQL_PASSWORD=users_reu
+      - MYSQL_DATABASE=users_reu
+    ports:
+      - '3308:3309'                            
+    networks:
+      - reu.net
+    volumes:
+      - './reu_authentification_service/sql:/var/sql'
+
+#
+# service administration des bases sql
+#
+  adminer:
+    image: adminer
+    ports:
+      - '8080:8080'
+    networks:
+      - reu.net
+
