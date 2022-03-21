@@ -1,1 +1,18 @@
+<<<<<<< HEAD
 [2022-03-21T15:22:34.936534+00:00] reu.log.ERROR: GET https://api.comments.local:19045/favicon.ico : malformed uri [] []
+=======
+[2022-03-21T15:16:57.624626+00:00] reu.log.ERROR: GET http://api.comments.local:19070/ : malformed uri [] []
+[2022-03-21T15:16:59.126049+00:00] reu.log.ERROR: GET http://api.comments.local:19070/favicon.ico : malformed uri [] []
+[2022-03-21T15:22:06.493480+00:00] reu.log.ERROR: GET http://api.comments.local:19070/create : malformed uri [] []
+[2022-03-21T15:22:07.893818+00:00] reu.log.ERROR: GET http://api.comments.local:19070/favicon.ico : malformed uri [] []
+[2022-03-21T15:22:13.063313+00:00] reu.log.ERROR: GET http://api.comments.local:19070/favicon.ico : malformed uri [] []
+[2022-03-21T15:27:51.493901+00:00] reu.log.ERROR: error | 500 | Call to a member function pathFor() on null | /var/www/src/app/controller/CommentController.phpline: 77 [] []
+[2022-03-21T15:29:14.366150+00:00] reu.log.ERROR: error | 500 | Call to a member function pathFor() on null | /var/www/src/app/controller/CommentController.phpline: 78 [] []
+[2022-03-21T15:30:12.625101+00:00] reu.log.ERROR: GET http://api.comments.local:19070/createComment : bad method - POST wanted [] []
+[2022-03-21T15:32:12.162992+00:00] reu.log.ERROR: error | 500 | Call to a member function pathFor() on null | /var/www/src/app/controller/CommentController.phpline: 78 [] []
+[2022-03-21T15:33:41.563769+00:00] reu.log.ERROR: error | 500 | Call to a member function pathFor() on null | /var/www/src/app/controller/CommentController.phpline: 78 [] []
+[2022-03-21T15:35:05.423655+00:00] reu.log.ERROR: error | 500 | Cannot use object of type Slim\Http\RequestBody as array | /var/www/src/app/controller/CommentController.phpline: 39 [] []
+[2022-03-21T15:36:51.855586+00:00] reu.log.ERROR: error | 500 | Call to a member function pathFor() on null | /var/www/src/app/controller/CommentController.phpline: 78 [] []
+[2022-03-21T15:37:26.631308+00:00] reu.log.ERROR: error | 500 | Call to a member function pathFor() on null | /var/www/src/app/controller/CommentController.phpline: 78 [] []
+[2022-03-21T15:38:23.278045+00:00] reu.log.ERROR: error | 500 | Call to a member function pathFor() on null | /var/www/src/app/controller/CommentController.phpline: 78 [] []
+>>>>>>> 234aa276ae23dbaff5b18a69d99f0e3b7d2fe195

@@ -9,3 +9,7 @@ $validators = Middleware::create_validators();
 $app->get('/comments/{idEvent}[/]',CommentController::class. ':getCommentsFromEvent')
      ->setName('getCommentsFromEvent')
      ->add(middleware::class. ':putIntoJson');
+     
+$app->post('/createComment[/]',
+    reu\comments\app\controller\CommentController::class.':create'
+);
