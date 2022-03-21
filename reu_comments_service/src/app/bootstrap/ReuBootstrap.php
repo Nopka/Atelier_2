@@ -3,7 +3,7 @@ namespace reu\comments\app\bootstrap;
 
 use Illuminate\Database\Capsule\Manager;
 
-class lbsBootstrap {
+class ReuBootstrap {
 
     public static function startEloquent($file) {
 
