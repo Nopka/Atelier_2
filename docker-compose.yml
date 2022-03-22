@@ -87,6 +87,7 @@ services:
       - mysql.events
       - mysql.users
 
+  #Service gateway qui sert d'intermédiaire entre les api
   api.gateway:
       image: 'canals/php:latest'
       environment:
@@ -101,12 +102,9 @@ services:
         - './reu_gateway_service/log:/var/log/app'
       working_dir: /var/www/src
       networks:
-        lbs.net:
+        reu.net:
           aliases:
             - api.gateway.local
-      depends_on:
-        - mysql.commande
-        - mysql.users
 
   # service sql pour le stockage des events -
   # utilisé par l'api  events et l'api comments
