@@ -1,5 +1,5 @@
 <?php
-namespace reu\comments\app\Middleware;
+namespace reu\comments\app\middleware;
 use  \Respect\Validation\Validator as V;
 
 class Middleware{

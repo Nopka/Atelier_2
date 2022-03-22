@@ -2,7 +2,7 @@
 
 use \reu\comments\app\controller\CommentController;
 use \reu\comments\app\middleware\Middleware;
-use \DavidePastore\Slim\Validation\Validation as Validation ;
+use \DavidePastore\Slim\Validation\Validation as Validation;
 
 $validators = Middleware::create_validators();
 
