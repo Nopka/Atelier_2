@@ -6,9 +6,9 @@ use \reu\backoffice\app\middleware\Middleware;
 use \reu\backoffice\app\middleware\Token;
 
 
+$app->delete('/events/{id}[/]',BackofficeController::class. ':deleteEvent')->setName('deleteEvent')->add(middleware::class. ':putIntoJson')->add(Token::class. ':check');
 
-$app->post('/events[/]',EventController::class. ':insertEvent')->setName('insertEvent')->add(middleware::class. ':putIntoJson');
-
+$app->delete('/users/{id}[/]',BackofficeController::class. ':deleteUser')->setName('deleteUser')->add(middleware::class. ':putIntoJson');
 
 
 //!combien garder l'evenement actif ? 6mois ? 

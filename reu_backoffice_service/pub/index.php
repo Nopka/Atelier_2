@@ -16,7 +16,7 @@ ReuBootstrap::startEloquent($c->settings['dbfile']);
 
 
 //Les routes de l'application
-require_once __DIR__ . '/../src/app/routes/routes_td.php';
+require_once __DIR__ . '/../src/app/routes/routes.php';
 
 
 $app->run();
