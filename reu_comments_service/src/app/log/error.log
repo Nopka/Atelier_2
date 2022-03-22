@@ -16,3 +16,7 @@
 [2022-03-21T15:37:26.631308+00:00] reu.log.ERROR: error | 500 | Call to a member function pathFor() on null | /var/www/src/app/controller/CommentController.phpline: 78 [] []
 [2022-03-21T15:38:23.278045+00:00] reu.log.ERROR: error | 500 | Call to a member function pathFor() on null | /var/www/src/app/controller/CommentController.phpline: 78 [] []
 >>>>>>> 234aa276ae23dbaff5b18a69d99f0e3b7d2fe195
+[2022-03-22T09:49:45.775859+00:00] reu.log.ERROR: GET https://api.comments.local:19045/createUser : malformed uri [] []
+[2022-03-22T09:49:46.717502+00:00] reu.log.ERROR: GET https://api.comments.local:19045/createUser : malformed uri [] []
+[2022-03-22T09:49:54.067727+00:00] reu.log.ERROR: GET https://api.comments.local:19045/createUser : malformed uri [] []
+[2022-03-22T09:50:03.563063+00:00] reu.log.ERROR: GET https://api.comments.local:19045/createUser : malformed uri [] []
