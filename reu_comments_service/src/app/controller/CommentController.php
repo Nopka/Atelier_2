@@ -38,6 +38,7 @@ class CommentController{
 
       }
    }
+   
    public function create(Request $req, Response $resp, array $arg) : Response 
    {
       if ($req->getAttribute('has_errors')) {
