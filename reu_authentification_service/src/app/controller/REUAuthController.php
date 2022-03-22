@@ -14,7 +14,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 /**
- * Class LBSAuthController
+ * Class REUAuthController
  * @package lbs\command\api\controller
  */
 class REUAuthController //extends Controller
@@ -57,7 +57,7 @@ class REUAuthController //extends Controller
 
         $secret = $this->container->settings['secret'];
         $token = JWT::encode(['iss' => 'http://api.authentification.local/auth',
-            'aud' => 'http://api.backoffice.local',
+            'aud' => 'http://api.gateway.local',
             'iat' => time(),
             'exp' => time() + (12 * 30 * 24 * 3600),
             'upr' => [
