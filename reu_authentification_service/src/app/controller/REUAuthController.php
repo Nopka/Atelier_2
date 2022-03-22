@@ -1,6 +1,7 @@
 <?php
 namespace reu\authentification\app\controller;
 
+use DateTime;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Firebase\JWT\ExpiredException;
@@ -54,6 +55,9 @@ class REUAuthController //extends Controller
             $rs = $rs->withHeader('WWW-authenticate', 'Basic realm="reu authentification" ');
             return Writer::json_error($rs, 401, $e->getMessage());
         }
+
+        $user->last_connected = new DateTime();
+        $user->save();
 
         $secret = $this->container->settings['secret'];
         $token = JWT::encode(['iss' => 'http://api.authentification.local/auth',
