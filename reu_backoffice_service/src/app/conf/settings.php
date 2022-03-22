@@ -7,6 +7,7 @@ return [
         'displayErrorDetails' => true,
 
         'dbfile' => __DIR__ . '/events.db.conf.ini.dist',
+        'dbfile' => __DIR__ . '/users.db.conf.ini.dist',
 
         'debug.name' => 'lbs.log',
         'debug.log' => __DIR__ . '/../log/debug.log',

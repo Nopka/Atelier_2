@@ -26,43 +26,51 @@ class backofficeController
         //pour supprimer un event, on récupère son token passé par un header ou en paramètre à la variable token.
         $received_id = $args['id'];
 
-        
         $event = Event::find($received_id);
 
         $date_now= new  DateTime();
-        $date_now =  $date_now->format('Y-m-d H:i:s');
-        $effectiveDate = date('Y-m-d', strtotime("+6 months", strtotime( $event['dateEvent'])));
-        $date_test = $effectiveDate;
+        $date_6months = date('Y-m-d H:i:s', strtotime("+6 months", strtotime( $event['dateEvent'])));
+        $date_convert = new DateTime($date_6months);
+      
 
+        $diff = date_diff($date_now, $date_convert)->format('%R');
+        if($diff == '-'){
+            $event->delete();
+            $res = "event deleted";
+        }else            
+            $res = "can't delete event, not expired yet";
+        
 
-       /*  $effectiveDate = new DateTime( $effectiveDate);
-        $intervall = date_diff($event['dateEvent'], $effectiveDate );
-        $intervall =  $intervall->format('Y-m-d H:i:s'); */
-
-        //$event->delete();
-
-       /*  $response2 = [
-            "dateNow" => $date_now,
-            "dateevent" =>  $event['dateEvent'],
-        ]; */
-
-        $res = $effectiveDate == $date_test  ? $event->delete() : "can't delete, still available";
+        //$res = $diff != '-'  ? $event->delete() : "can't delete, not expired yet";
 
         $response =  [
-            'status' =>  "event supprimé? ".$res,
-            'event' => $event
+            'status' => $res,
+            'event'  => $event
         ];
 
         $resp->getBody()->write(json_encode($response));
         return writer::json_output($resp, 200);
     }
 
-    public function deleteUser(){
+    public function deleteUser(Request $req, Response $resp, array $args): Response {
         $received_id = $args['id'];
+        
         $user = User::find($received_id);
+
+        $date_now= new  DateTime();
+        $date_6months = date('Y-m-d H:i:s', strtotime("+6 months", strtotime( $user['created_at'])));
+        $date_convert = new DateTime($date_6months);
+
+        $diff = date_diff($date_now, $date_convert)->format('%R');
+        if($diff == '-'){
+            $event->delete();
+            $res = "user deleted";
+        }else            
+            $res = "can't delete user, not expired yet";
+
         $response =  [
-            'status' =>  "user supprimé : ",
-             'user' => $user
+            'status' => $res,
+            'user'   => $user
         ];
         $resp->getBody()->write(json_encode($response));
         return writer::json_output($resp, 200);
