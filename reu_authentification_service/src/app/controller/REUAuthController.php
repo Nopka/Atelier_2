@@ -80,9 +80,7 @@ class REUAuthController //extends Controller
         return Writer::json_output($rs, 200, $data);
     }
 
-    public function deleteUser($received_id) {
-        $user = User::find($received_id);
-
+    public function deleteUser($user) {
         $date_now= new  \DateTime();
         $date_1month = date('Y-m-d H:i:s', strtotime("+1 month", strtotime( $user['last_connected'])));
 
@@ -155,21 +153,20 @@ class REUAuthController //extends Controller
 
     public function delete(Request $req, Response $resp, array $args) : Response {
         try {
-            $users = User::select(["id"])->get();
-            $json = [
-                'usersDeteted' => []
-            ];
+            $users = User::all();
+
+            $json = [];
 
             foreach($users as $user) {
-                $response = $this->deleteUser($user->id);
+                $response = $this->deleteUser($user);
                 if($response){
-                    array_push($json['userDeteted'], $response);
+                    array_push($json, $response);
                 }
             }
             
             $resp = $resp->withStatus(201);
             $body = json_encode([
-                "lenght" => count($users),
+                "lenght" => count($json),
                 "users" => json_encode($json),
             ]);
         }catch(ModelNotFoundException $e) {
