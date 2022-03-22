@@ -1,0 +1,9 @@
+
+
+driver=mysql
+username=users_reu
+password=users_reu
+host=mysql.users
+database=users_reu
+charset=utf8
+collation=utf8_unicode_ci

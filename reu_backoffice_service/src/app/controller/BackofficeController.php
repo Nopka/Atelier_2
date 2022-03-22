@@ -52,5 +52,20 @@ class backofficeController
         return writer::json_output($resp, 200);
     }
 
+    public function deleteUser(Request $req, Response $resp, array $args): Response{
+        $client = new \GuzzleHttp\Client();
+
+        //$headers = ['Authorization' => explode(" ", $rq->getHeader('Authorization')[0])[1]];
+        //$response = $client->request('GET', 'http://api.authentification.local:19090/deleteUser/', $headers);
+
+        $users = User::all();
+
+        foreach($users as $user){
+            $response = $client->request('DELETE', 'http://api.authentification.local:19090/deleteUser/'.$user->id, $headers);
+            var_dump($response->getStatusCode(), $response->getBody());
+        }
+        
+    }
+     
    
 }
