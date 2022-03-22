@@ -61,7 +61,7 @@ class backofficeController
         //$users = User::all();
 
         foreach($users as $user){
-            $response = $client->request('DELETE', 'http://api.authentification.local:19090/deleteUser/'.$user->id, $headers);
+            $response = $client->request('DELETE', 'http://api.authentification.local:19090/deleteUser/'.$user->id);
             var_dump($response->getStatusCode(), $response->getBody());
         }
         
