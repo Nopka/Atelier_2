@@ -14,6 +14,9 @@ class GatewayController{
      $this->c = $c;
    }
 
-   
+   public function getCommentsFromEvent(Request $req, Response $resp, array $args) :  Response
+   {
+      
+   }
    
 }
