@@ -17,5 +17,5 @@ $app->post('/createUser[/]',REUAuthController::class.':create')
 $app->delete('/deleteUser/{id}[/]',REUAuthController::class.':deleteUser')
     ->setName('deleteUser');
 
-$app->get('/users[/]',REUAuthController::class.':getAllUsers')
+$app->delete('/users[/]',REUAuthController::class.':delete')
     ->setName('getAllUsers');
