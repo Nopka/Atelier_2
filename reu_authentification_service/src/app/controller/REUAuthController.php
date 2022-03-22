@@ -103,7 +103,7 @@ class REUAuthController //extends Controller
         $resp->getBody()->write(json_encode($response));
         return writer::json_output($resp, 200);
     }
-    
+
     public function create(Request $req, Response $resp, array $args) : Response {
         if ($req->getAttribute('has_errors')) {
             $errors = $req->getAttribute('errors');
