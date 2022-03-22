@@ -80,9 +80,7 @@ class REUAuthController //extends Controller
         return Writer::json_output($rs, 200, $data);
     }
 
-    public function deleteUser(Request $req, Response $resp, array $args): Response {
-        $received_id = $args['id'];
-        
+    public function deleteUser($received_id) {
         $user = User::find($received_id);
 
         $date_now= new  \DateTime();
@@ -90,16 +88,10 @@ class REUAuthController //extends Controller
 
         if($user['last_connected']  > $date_1month  ){
             $user->delete();
-            $res = "user deleted";
-        }else            
-            $res = "can't delete user, not expired yet";
-
-        $response =  [
-            'status' => $res,
-            'user'   => $user
-        ];
-        $resp->getBody()->write(json_encode($response));
-        return writer::json_output($resp, 200);
+            return $user;
+        }else {           
+            return false;
+        }
     }
 
     public function create(Request $req, Response $resp, array $args) : Response {
@@ -161,14 +153,24 @@ class REUAuthController //extends Controller
       return $resp;
     }
 
-    public function getAllUsers(Request $req, Response $resp, array $args) : Response {
+    public function delete(Request $req, Response $resp, array $args) : Response {
         try {
             $users = User::select(["id"])->get();
+            $json = [
+                'usersDeteted' => []
+            ];
 
+            foreach($users as $user) {
+                $response = $this->deleteUser($user->id);
+                if($response){
+                    array_push($json['userDeteted'], $response);
+                }
+            }
+            
             $resp = $resp->withStatus(201);
             $body = json_encode([
                 "lenght" => count($users),
-                "users" => $users
+                "users" => json_encode($json),
             ]);
         }catch(ModelNotFoundException $e) {
             $rs = $resp->withStatus(404);

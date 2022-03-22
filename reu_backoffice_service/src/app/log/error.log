@@ -39,3 +39,5 @@
 [2022-03-22T14:07:27.922510+00:00] lbs.log.ERROR: error | 500 | Call to a member function getHeader() on null | /var/www/src/app/controller/BackofficeController.phpline: 58 [] []
 [2022-03-22T14:16:51.513017+00:00] lbs.log.ERROR: GET http://api.backoffice.local:20080/users/31fd9fac19b0e13c01528246f92d4a9aa18869bbe5aa5581035be9ea3421ac9b0e5ce1d8 : bad method - DELETE wanted [] []
 [2022-03-22T14:16:53.309446+00:00] lbs.log.ERROR: GET http://api.backoffice.local:20080/favicon.ico : malformed uri [] []
+[2022-03-22T14:42:26.206578+00:00] lbs.log.ERROR: GET http://api.backoffice.local:20080/ : malformed uri [] []
+[2022-03-22T14:42:33.028417+00:00] lbs.log.ERROR: GET http://api.backoffice.local:20080/users : bad method - DELETE wanted [] []
