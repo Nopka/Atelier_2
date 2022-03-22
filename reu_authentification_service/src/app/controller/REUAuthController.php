@@ -162,4 +162,26 @@ class REUAuthController //extends Controller
          } 
       return $resp;
     }
+
+    public function getAllUsers(Request $req, Response $resp, array $args) : Response {
+        try {
+            $users = User::select(["id"])->get();
+
+            $resp = $resp->withStatus(201);
+            $body = json_encode([
+                "lenght" => count($users),
+                "users" => $users
+            ]);
+        }catch(ModelNotFoundException $e) {
+            $rs = $resp->withStatus(404);
+            $body = json_encode([
+                "type" => "error",
+                "error" => "404",
+                "message" => "Une erreur est survenu lors de la création du compte, réessayer ultérieurement !"
+            ]);
+        }
+        $resp = $resp->withHeader('Content-Type', 'application/json;charset=utf-8');
+        $resp->getBody()->write($body);
+        return $resp;
+    }
 }

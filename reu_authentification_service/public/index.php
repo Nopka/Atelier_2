@@ -17,14 +17,7 @@ $app = new \Slim\App($container);
 
 Eloquent::start(($app->getContainer())->settings['dbconf']);
 
-$app->post('/auth[/]',
-    reu\authentification\app\controller\REUAuthController::class.':authenticate'
-);
-
-$app->post('/createUser[/]',
-    reu\authentification\app\controller\REUAuthController::class.':create'
-);
-
-$app->delete('/deleteUser/{id}[/]',REUAuthController::class.':deleteUser');
+//Les routes de l'application
+require_once __DIR__ . '/../src/app/routes/routes.php';
 
 $app->run();
