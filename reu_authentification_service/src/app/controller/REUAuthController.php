@@ -26,7 +26,7 @@ class REUAuthController //extends Controller
         $this->container = $container;
     }
 
-    public function authenticate(Request $rq, Response $rs, $args): Response {
+    public function authenticate(Request $rq, Response $rs, array $args): Response {
 
         if (!$rq->hasHeader('Authorization')) {
 
@@ -98,6 +98,64 @@ class REUAuthController //extends Controller
         ];
         $resp->getBody()->write(json_encode($response));
         return writer::json_output($resp, 200);
-
+    }
+    
+    public function create(Request $req, Response $resp, array $args) : Response {
+        if ($req->getAttribute('has_errors')) {
+            $errors = $req->getAttribute('errors');
+            $rs = $resp->withStatus(400);
+   
+            $body = json_encode([
+               "type" => "error",
+               "error" => "400",
+               "message" => $errors
+            ]);
+   
+            $rs = $rs->withHeader('Content-Type', 'application/json;charset=utf-8');
+            $rs->getBody()->write($body);
+            return $rs;
+         } else {
+            try {
+               $args = $req->getParsedBody();
+               $username = htmlspecialchars($args["Uname"], ENT_QUOTES);
+               $email = filter_var($args["mail"], FILTER_SANITIZE_EMAIL);
+               $pwd = htmlspecialchars($args["pwd"], ENT_QUOTES);
+               $desc = htmlspecialchars($args["desc"], ENT_QUOTES);
+   
+               $id = random_bytes(36);
+               $id = bin2hex($id);
+   
+               $user = new User();
+               $user->id = $id;
+               $user->username = $username;
+               $user->email = $email;
+               $user->refresh_token = '';
+               $user->password = password_hash($pwd, PASSWORD_DEFAULT);
+               $user->description = $desc;
+               $user->save();
+   
+               $body = json_encode([
+                  "User" => [
+                     "id" => $id,
+                     "Uname" => $username,
+                     "mail" => $email,
+                     "pwd" => $pwd,
+                     "desc" => $desc,
+                  ]
+               ]);
+               $rs = $resp->withStatus(201);
+            }
+            catch(ModelNotFoundException $e) {
+               $rs = $rs->withStatus(404);
+               $body = json_encode([
+                  "type" => "error",
+                  "error" => "404",
+                  "message" => "Une erreur est survenu lors de la création du compte, réessayer ultérieurement !"
+               ]);
+            }
+            $rs = $rs->withHeader('Content-Type', 'application/json;charset=utf-8');
+            $rs->getBody()->write($body);
+         } 
+      return $resp;
     }
 }

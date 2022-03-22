@@ -20,4 +20,8 @@ $app->post('/auth[/]',
     reu\authentification\app\controller\REUAuthController::class.':authenticate'
 );
 
+$app->post('/createUser[/]',
+    reu\authentification\app\controller\REUAuthController::class.':create'
+);
+
 $app->run();
