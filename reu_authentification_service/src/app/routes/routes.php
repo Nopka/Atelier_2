@@ -18,4 +18,4 @@ $app->delete('/deleteUser/{id}[/]',REUAuthController::class.':deleteUser')
     ->setName('deleteUser');
 
 $app->delete('/users[/]',REUAuthController::class.':delete')
-    ->setName('getAllUsers');
+    ->setName('delete');
