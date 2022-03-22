@@ -11,5 +11,5 @@ $app->get('/comments/{idEvent}[/]',CommentController::class. ':getCommentsFromEv
      ->add(middleware::class. ':putIntoJson');
      
 $app->post('/createComment[/]',
-    reu\comments\app\controller\CommentController::class.':create'
+    CommentController::class.':create'
 );
