@@ -26,3 +26,4 @@
 [2022-03-22T08:41:27.517065+00:00] lbs.log.ERROR: error | 500 | Call to a member function format() on bool | /var/www/src/app/controller/BackofficeController.phpline: 37 [] []
 [2022-03-22T08:50:12.269566+00:00] lbs.log.ERROR: unkown event [] []
 [2022-03-22T08:55:16.763770+00:00] lbs.log.ERROR: unkown event [] []
+[2022-03-22T09:09:55.312547+00:00] lbs.log.ERROR: Missing token in event route [] []

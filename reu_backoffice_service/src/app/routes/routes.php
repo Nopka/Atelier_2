@@ -11,6 +11,6 @@ $app->delete('/events/{id}[/]',BackofficeController::class. ':deleteEvent')->set
 $app->delete('/users/{id}[/]',BackofficeController::class. ':deleteUser')->setName('deleteUser')->add(middleware::class. ':putIntoJson');
 
 
-//!combien garder l'evenement actif ? 6mois ? 
-//!combien garder l'utilisateur actif ? 1 an ? 
+//!combien garder l'evenement actif ? 6mois  
+//!combien garder l'utilisateur actif ? last-connected 
 

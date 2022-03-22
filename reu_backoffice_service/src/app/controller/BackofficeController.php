@@ -52,29 +52,5 @@ class backofficeController
         return writer::json_output($resp, 200);
     }
 
-    public function deleteUser(Request $req, Response $resp, array $args): Response {
-        $received_id = $args['id'];
-        
-        $user = User::find($received_id);
-
-        $date_now= new  DateTime();
-        $date_6months = date('Y-m-d H:i:s', strtotime("+6 months", strtotime( $user['created_at'])));
-        $date_convert = new DateTime($date_6months);
-
-        $diff = date_diff($date_now, $date_convert)->format('%R');
-        if($diff == '-'){
-            $event->delete();
-            $res = "user deleted";
-        }else            
-            $res = "can't delete user, not expired yet";
-
-        $response =  [
-            'status' => $res,
-            'user'   => $user
-        ];
-        $resp->getBody()->write(json_encode($response));
-        return writer::json_output($resp, 200);
-
-    }
    
 }

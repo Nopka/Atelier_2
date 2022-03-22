@@ -8,6 +8,7 @@ class ReuBootstrap {
     public static function startEloquent($file) {
 
         $conf = parse_ini_file($file);
+        
         $db = new Manager();
 
         $db->addConnection($conf);

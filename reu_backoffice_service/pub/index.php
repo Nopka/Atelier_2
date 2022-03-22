@@ -15,6 +15,7 @@ $app = new \Slim\App($c);
 ReuBootstrap::startEloquent($c->settings['dbfile']);
 
 
+
 //Les routes de l'application
 require_once __DIR__ . '/../src/app/routes/routes.php';
 
