@@ -1,5 +1,5 @@
 <?php
-namespace reu\comments\app\models;
+namespace reu\events\app\models;
 
 class Comment extends \Illuminate\Database\Eloquent\Model {
 

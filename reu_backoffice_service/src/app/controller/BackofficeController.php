@@ -23,44 +23,32 @@ class backofficeController
     }
 
     public function deleteEvent(Request $req, Response $resp, array $args): Response {
-        //pour supprimer un event, on récupère son token passé par un header ou en paramètre à la variable token.
-        $received_id = $args['id'];
+        $client = new \GuzzleHttp\Client([
+            'base_uri' => $this->c->get('settings')['events_service'],
+            'timeout' => 5.0
+        ]);
 
-        $event = Event::find($received_id);
+        //$headers = ['Authorization' => explode(" ", $rq->getHeader('Authorization')[0])[1]];
+        $response = $client->delete('/events', /*[
+            'headers' => ['Authorization' => $req->getHeader('Authorization')]
+        ]*/);
 
-        $date_now= new  DateTime();
-        $date_6months = date('Y-m-d H:i:s', strtotime("+6 months", strtotime( $event['dateEvent'])));
-        $date_convert = new DateTime($date_6months);
-      
-
-        $diff = date_diff($date_now, $date_convert)->format('%R');
-        if($diff == '-'){
-            $event->delete();
-            $res = "event deleted";
-        }else            
-            $res = "can't delete event, not expired yet";
-        
-
-        //$res = $diff != '-'  ? $event->delete() : "can't delete, not expired yet";
-
-        $response =  [
-            'status' => $res,
-            'event'  => $event
-        ];
-
-        $resp->getBody()->write(json_encode($response));
-        return writer::json_output($resp, 200);
+        $resp->getBody()->write($response->getBody());
+        return writer::json_output($resp, $response->getStatusCode());
     }
 
     public function deleteUser(Request $req, Response $resp, array $args): Response{
-        $client = new \GuzzleHttp\Client();
+        $client = new \GuzzleHttp\Client([
+            'base_uri' => $this->c->get('settings')['auth_service'],
+            'timeout' => 5.0
+        ]);
 
         //$headers = ['Authorization' => explode(" ", $rq->getHeader('Authorization')[0])[1]];
-        $response = $client->request('DELETE', 'http://api.authentification.local:19090/users');
+        $response = $client->delete('/users', /*[
+            'headers' => ['Authorization' => $req->getHeader('Authorization')]
+        ]*/);
 
-        $resp->getBody()->write($response);
-        return writer::json_output($resp, 200);
+        $resp->getBody()->write($response->getBody());
+        return writer::json_output($resp, $response->getStatusCode());
     }
-     
-   
 }

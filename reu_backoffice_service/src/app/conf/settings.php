@@ -5,6 +5,8 @@ use Slim\Container;
 return [
     'settings' => [
         'displayErrorDetails' => true,
+        "auth_service" => "http://api.authentification.local",
+        "events_service" => "http://api.events.local",
 
         'dbfile' => __DIR__ . '/events.db.conf.ini.dist',
 

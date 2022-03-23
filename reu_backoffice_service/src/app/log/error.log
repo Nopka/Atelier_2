@@ -41,3 +41,8 @@
 [2022-03-22T14:16:53.309446+00:00] lbs.log.ERROR: GET http://api.backoffice.local:20080/favicon.ico : malformed uri [] []
 [2022-03-22T14:42:26.206578+00:00] lbs.log.ERROR: GET http://api.backoffice.local:20080/ : malformed uri [] []
 [2022-03-22T14:42:33.028417+00:00] lbs.log.ERROR: GET http://api.backoffice.local:20080/users : bad method - DELETE wanted [] []
+[2022-03-22T15:23:52.660828+00:00] lbs.log.ERROR: error | 500 | Call to a member function get() on null | /var/www/src/app/controller/BackofficeController.phpline: 57 [] []
+[2022-03-22T15:24:18.222188+00:00] lbs.log.ERROR: error | 500 | Call to a member function get() on null | /var/www/src/app/controller/BackofficeController.phpline: 57 [] []
+[2022-03-22T15:25:14.464954+00:00] lbs.log.ERROR: error | 500 | Call to a member function get() on null | /var/www/src/app/controller/BackofficeController.phpline: 57 [] []
+[2022-03-22T15:33:09.559173+00:00] lbs.log.ERROR: GET http://api.backoffice.local:20080/users : bad method - DELETE wanted [] []
+[2022-03-23T09:57:29.416837+00:00] lbs.log.ERROR: Missing token in event route [] []

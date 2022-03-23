@@ -19,8 +19,17 @@ import axios from "axios";
 //     return config;
 // });
 
+Vue.prototype.$api = new axios.create({
+    baseURL : "https://api.backoffice.local/",
+    params : {
+      test : true,
+    },
+    headers: {'Authorization': "ffdee83ba15a9cb83144e6a9b244100470c08b67"}
+  });
 
 Vue.config.productionTip = false
+
+
 
 new Vue({
     router,
