@@ -34,10 +34,16 @@ const routes = [{
             import ('../views/ProfilUser.vue')
     },
     {
-        path: '/NotificationsUser',
-        name: 'NotificationsUser',
+        path: '/Invitations',
+        name: 'Invitations',
         component: () =>
-            import ('../views/NotificationsUser.vue')
+            import ('../views/Invitations.vue')
+    },
+    {
+        path: '/DetailEvent',
+        name: 'DetailEvent',
+        component: () =>
+            import ('../views/DetailEvent.vue')
     },
 ]
 
