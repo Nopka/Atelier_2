@@ -20,13 +20,13 @@
               </div>
               <div class="card">
                 <footer class="card-footer">
-                   <router-link to="/DetailEvent" class="button is-black is-light btn-footer">
+                   <router-link to="/DetailEvent" class="button is-black is-light btn">
                     Consulter
                   </router-link>
-                  <button class="button is-success is-light btn-footer">
+                  <button class="button is-success is-light btn">
                     Accepter
                   </button>
-                   <button class="button is-danger is-light btn-footer">
+                   <button class="button is-danger is-light btn">
                     Refuser
                   </button>
                 </footer>
@@ -44,13 +44,13 @@
               </div>
               <div class="card">
                <footer class="card-footer">
-                   <router-link to="/DetailEvent" class="button is-black is-light btn-footer">
+                   <router-link to="/DetailEvent" class="button is-black is-light btn">
                     Consulter
                   </router-link>
-                  <button class="button is-success is-light btn-footer">
+                  <button class="button is-success is-light btn">
                     Accepter
                   </button>
-                   <button class="button is-danger is-light btn-footer">
+                   <button class="button is-danger is-light btn">
                     Refuser
                   </button>
                 </footer>
@@ -68,13 +68,13 @@
               </div>
               <div class="card">
              <footer class="card-footer">
-                   <router-link to="/DetailEvent" class="button is-black is-light btn-footer">
+                   <router-link to="/DetailEvent" class="button is-black is-light btn">
                     Consulter
                   </router-link>
-                  <button class="button is-success is-light btn-footer">
+                  <button class="button is-success is-light btn">
                     Accepter
                   </button>
-                   <button class="button is-danger is-light btn-footer">
+                   <button class="button is-danger is-light btn">
                     Refuser
                   </button>
              </footer>
@@ -96,8 +96,8 @@ export default {};
     color : white;
 }
 
-.btn-footer {
-  margin: 10px 0em 10px 5em;
-  width: 5em;
+.btn {
+  margin: 10px 0px 10px 14%;
+  width: 15%;
 }
 </style>

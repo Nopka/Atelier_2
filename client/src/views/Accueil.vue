@@ -20,19 +20,26 @@
             <div class="card mb-5">
               <div class="card-content">
                 <div class="content">
-                  <p class="subtitle">L'anniv de Rita</p> 
-                  <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time> 
-                  <p class="">@johnsmith</p>
+                   <h4 class="title is-5 has-text-centered mb-20 title-chat">
+                    Soirée Monopoly Chez Alice
+                  </h4>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
+                    at, pariatur quod quidem, est dolorem distinctio eius
+                    repellendus ullam doloribus magnam dicta, porro necessitatibus
+                    velit iure odit corrupti vitae modi!
+                  </p>
+                  <p><b>Date</b> : 23/03/2022</p>
+                  <p><b>Lieu</b> : 2Ter Bd Charlemagne, 54000 Nancy</p>
+                  <p><b>Author:</b> @Smith</p>
 
                 </div>
               </div>
               <div class="card">
                 <footer class="card-footer">
-                  <button
-                    class="button is-warning is-light btn-footer js-modal-trigger"
-                  >
-                    Modifier
-                  </button>
+                  <router-link to="/FormEvent" class="button is-warning is-light btn-footer js-modal-trigge">
+                  Modifier
+                  </router-link>
                   <button
                     class="button is-danger is-light btn-footer js-modal-trigger"
                     data-target="supprimer"
@@ -68,21 +75,11 @@
                 </div>
               </div>
               <div class="card">
-                <footer class="container is-fullhd">
-                     <button class="button is-warning is-light btn-footer">
-                    Modifier
-                  </button>
-                  <button class="button is-danger is-light btn-footer">
-                    Supprimer
-                  </button>
-                  <button class="button is-info is-light btn-footer">
-                    Inviter
-                  </button>
-                  <button class="button is-black is-light btn-footer">
-                    lien
-                  </button>
-
-              
+                <footer class="card-footer">
+                    <button class="button is-warning is-light btn-footer ">Modifier</button>
+                    <button class="button is-danger is-light btn-footer">Supprimer </button>
+                    <button class="button is-info is-light btn-footer ">Inviter</button>
+                    <button class="button is-black is-light btn-footer ">lien</button>                 
                 </footer>
               </div>
             </div>
@@ -228,7 +225,6 @@ export default {
   },
   mounted(){
   },
-  methods: {},
 };
 </script>
 
@@ -238,11 +234,11 @@ export default {
   font-family: "Poppins", sans-serif;
 }
 .btn-footer {
-  margin: 10px 0em 10px 3em;
-  width: 5em;
+  margin: 10px 0px 10px 8%;
+  width: 15%;
+  //flex-basis: 100%;
 }
-footer .container{
-  display: flex;
-  justify-content: space-between;
-}
+
+
+
 </style>

@@ -18,10 +18,10 @@
               <p><b>Date</b> : 23/03/2022</p>
               <p><b>Lieu</b> : 2Ter Bd Charlemagne, 54000 Nancy</p>
               <footer class="card-footer">
-                <button class="button is-success is-light btn-footer">
+                <button class="button is-success is-light f-btn">
                   Accepter
                 </button>
-                <button class="button is-danger is-light btn-footer">
+                <button class="button is-danger is-light f-btn">
                   Refuser
                 </button>
               </footer>
@@ -208,8 +208,8 @@ export default {
   color: black;
 }
 
-.btn-footer {
+.f-btn {
   margin: 10px 0em 0px 15em;
-  width: 5em;
+  width: 15%;
 }
 </style>
