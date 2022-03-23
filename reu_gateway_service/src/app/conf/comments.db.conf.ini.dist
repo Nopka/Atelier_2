@@ -1,9 +1,0 @@
-
-
-driver=mysql
-username=events_reu
-password=events_reu
-host=mysql.events
-database=events_reu
-charset=utf8
-collation=utf8_unicode_ci

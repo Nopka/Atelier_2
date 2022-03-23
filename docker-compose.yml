@@ -83,28 +83,7 @@ services:
       reu.net:
         aliases:
           - api.backoffice.local
-    depends_on:
-      - mysql.events
-      - mysql.users
 
-  #Service gateway qui sert d'intermédiaire entre les api
-  api.gateway:
-      image: 'canals/php:latest'
-      environment:
-        - VHOST_HOSTNAME=api.gateway.local
-        - VHOST_DOCROOT=/var/www/pub
-      ports:
-        - '20090:80'
-        - '20053:443'
-      volumes:
-        - './reu_gateway_service/pub:/var/www/pub'
-        - './reu_gateway_service/src:/var/www/src'
-        - './reu_gateway_service/log:/var/log/app'
-      working_dir: /var/www/src
-      networks:
-        reu.net:
-          aliases:
-            - api.gateway.local
 
   # service sql pour le stockage des events -
   # utilisé par l'api  events et l'api comments
