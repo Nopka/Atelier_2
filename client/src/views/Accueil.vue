@@ -226,6 +226,9 @@ export default {
       this.showModalFlagL = false;
     },
   },
+  mounted(){
+  },
+  methods: {},
 };
 </script>
 

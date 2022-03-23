@@ -11,7 +11,7 @@
         <div class="navbar-start">
           <router-link class="navbar-item" to="/Accueil"><i class="fa-solid fa-calendar-check mr-2"></i>Mes évènements </router-link>
           <router-link class="navbar-item" to="/ProfilUser"><i class="fa-solid fa-user-tie mr-2"></i> Mon profil </router-link>
-          <router-link class="navbar-item" to="/NotificationsUser"><i class="fa-solid fa-bell mr-2"></i>Notifications</router-link>
+          <router-link class="navbar-item" to="/Invitations"><i class="fa-solid fa-bell mr-2"></i>Invitations</router-link>
         </div>
 
         <div class="navbar-end">
