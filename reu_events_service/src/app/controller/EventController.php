@@ -221,4 +221,43 @@ class EventController
         }
         return $resp;
     }
+
+    public function deleteEvents(Request $req, Response $resp, array $args): Response {
+        //pour supprimer un event, on récupère son token passé par un header ou en paramètre à la variable token.
+
+        $listIdEvents = Event::select(['id'])->get();
+
+        $body = [
+            'lenght' => 0,
+            'events' => []
+        ];
+
+        foreach($listIdEvents as $idEvent) {
+            $event = Event::find($idEvent->id);
+
+            $date_now= new  DateTime();
+            $date_6months = date('Y-m-d H:i:s', strtotime("+6 months", strtotime( $event['dateEvent'])));
+            $date_convert = new DateTime($date_6months);
+        
+
+            $diff = date_diff($date_now, $date_convert)->format('%R');
+            if($diff == '-'){
+                $event->delete();
+                $res = "event deleted";
+            }else            
+                $res = "can't delete event, not expired yet";
+            
+
+            //$res = $diff != '-'  ? $event->delete() : "can't delete, not expired yet";
+
+            $response =  [
+                'status' => $res,
+                'event'  => $event
+            ];
+           array_push($body['events'], $response);
+        }
+
+        $resp->getBody()->write(json_encode($body));
+        return writer::json_output($resp, 200);
+    }
 }
