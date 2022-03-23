@@ -126,6 +126,8 @@ class REUAuthController //extends Controller
                $user->refresh_token = '';
                $user->password = password_hash($pwd, PASSWORD_DEFAULT);
                $user->description = $desc;
+               $user->role = 1;
+               $user->last_connected = new DateTime();
                $user->save();
    
                $body = json_encode([
@@ -169,14 +171,14 @@ class REUAuthController //extends Controller
             $resp = $resp->withStatus(201);
             $body = json_encode([
                 "lenght" => count($json),
-                "users" => json_encode($json),
+                "users" => $json,
             ]);
         }catch(ModelNotFoundException $e) {
             $rs = $resp->withStatus(404);
             $body = json_encode([
                 "type" => "error",
                 "error" => "404",
-                "message" => "Une erreur est survenu lors de la création du compte, réessayer ultérieurement !"
+                "message" => "Une erreur est survenu lors de la suppression du compte, réessayer ultérieurement !"
             ]);
         }
         $resp = $resp->withHeader('Content-Type', 'application/json;charset=utf-8');

@@ -14,8 +14,7 @@ $app->post('/createUser[/]',REUAuthController::class.':create')
     ->add(middleware::class.':putIntoJson')
     ->add(new Validation($validators));
 
-// $app->delete('/deleteUser/{id}[/]',REUAuthController::class.':deleteUser')
-//     ->setName('deleteUser');
-
 $app->delete('/users[/]',REUAuthController::class.':delete')
-    ->setName('delete');
+    ->setName('delete')
+    ->add(middleware::class.':putIntoJson')
+    ->add(new Validation($validators));
