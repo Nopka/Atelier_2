@@ -61,7 +61,7 @@ class REUAuthController //extends Controller
 
         $secret = $this->container->settings['secret'];
         $token = JWT::encode(['iss' => 'http://api.authentification.local/auth',
-            'aud' => 'http://api.gateway.local',
+            'aud' => 'http://api.backoffice.local',
             'iat' => time(),
             'exp' => time() + (12 * 30 * 24 * 3600),
             'upr' => [
@@ -81,10 +81,12 @@ class REUAuthController //extends Controller
     }
 
     public function deleteUser($user) {
+        
         $date_now= new  \DateTime();
-        $date_1month = date('Y-m-d H:i:s', strtotime("+1 month", strtotime( $user['last_connected'])));
+        $date_12month = date('Y-m-d H:i:s', strtotime("+12 months", strtotime( $user['last_connected'])));
 
-        if($user['last_connected']  > $date_1month  ){
+        $temp = date_diff(new \DateTime($date_12month),$date_now)->format('%R');
+        if($temp === '+'){
             $user->delete();
             return $user;
         }else {           
