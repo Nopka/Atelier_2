@@ -62,10 +62,9 @@ class backofficeController
         $response = $client->delete('/users', /*[
             'headers' => ['Authorization' => $req->getHeader('Authorization')]
         ]*/);
-        var_dump($response->getStatusCode(), $response->getBody());
 
-        $resp->getBody()->write(["test"=> "test"]);
-        return writer::json_output($resp, 200);
+        $resp->getBody()->write($response->getBody());
+        return writer::json_output($resp, $response->getStatusCode());
     }
      
    
