@@ -21,7 +21,9 @@ services:
       - './reu_events_service/src:/var/www/src'
     working_dir: /var/www/src
     networks:
-      - reu.net
+      reu.net:
+        aliases:
+          - api.events.local
     depends_on:
       - mysql.events
 
@@ -44,24 +46,6 @@ services:
           - api.authentification.local
     depends_on:
       - mysql.users
-
-  # service api.suivi.comments : api front-office pour le suivi des commentaires
-  api.comments:
-    image: 'canals/php:latest'
-    environment:
-      - VHOST_HOSTNAME=api.comments.local
-      - VHOST_DOCROOT=/var/www/public
-    ports:
-      - '19070:80'
-      - '19045:443'
-    volumes:
-      - './reu_comments_service/public:/var/www/public'
-      - './reu_comments_service/src:/var/www/src'
-    working_dir: /var/www/src
-    networks:
-      - reu.net
-    depends_on:
-      - mysql.events
   
   api.backoffice:
     image: 'canals/php:latest'

@@ -1,11 +1,11 @@
 <?php
-namespace reu\comments\app\controller;
+namespace reu\events\app\controller;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use reu\comments\app\models\Comment;
-use reu\comments\app\output\Writer;
+use reu\events\app\models\Comment;
+use reu\events\app\errors\Writer;
 
 class CommentController{
    private $c;
