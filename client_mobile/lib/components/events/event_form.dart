@@ -2,18 +2,21 @@ import 'package:client_mobile/models/event.dart';
 import 'package:flutter/material.dart';
 //import 'package:client_mobile/data/events_collection.dart';
 
-class TaskForm extends StatefulWidget {
-  const TaskForm({Key? key, this.task, required this.tasksCollection})
-      : super(key: key);
+class EventForm extends StatefulWidget {
+  const EventForm({
+    Key? key,
+    this.task,
+    /*required this.tasksCollection*/
+  }) : super(key: key);
 
   final Event? task;
-  final Event tasksCollection;
+  //final Event tasksCollection;
 
   @override
-  State<TaskForm> createState() => _TaskFormState();
+  State<EventForm> createState() => _EventFormState();
 }
 
-class _TaskFormState extends State<TaskForm> {
+class _EventFormState extends State<EventForm> {
   final _formKey = GlobalKey<FormState>();
 
   final myController = TextEditingController();
@@ -29,43 +32,58 @@ class _TaskFormState extends State<TaskForm> {
       children: [
         Form(
           key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: myController,
-                decoration: const InputDecoration(
-                  hintText: "Titre",
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: myController,
+                  decoration: const InputDecoration(
+                    hintText: "Titre",
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Veuillez rentrez une valeur correcte';
+                    }
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Veuillez rentrez une valeur correcte';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: myController,
-                decoration: const InputDecoration(
-                  hintText: "Description",
+                TextFormField(
+                  controller: myController,
+                  decoration: const InputDecoration(
+                    hintText: "Description",
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Veuillez rentrez une valeur correcte';
+                    }
+                    return null;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Veuillez rentrez une valeur correcte';
-                  }
-                  return null;
-                },
-              ),
-              CalendarDatePicker(
-                initialDate: now,
-                firstDate: now,
-                lastDate: last,
-                onDateChanged: (DateTime? value) {
-                  setState(() {
-                    selectedDate = value!;
-                  });
-                },
-              ),
-            ],
+                CalendarDatePicker(
+                  initialDate: now,
+                  firstDate: now,
+                  lastDate: last,
+                  onDateChanged: (DateTime? value) {
+                    setState(() {
+                      selectedDate = value!;
+                    });
+                  },
+                ),
+                TextFormField(
+                  controller: myController,
+                  decoration: const InputDecoration(
+                    hintText: "Lieu",
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Veuillez rentrez une valeur correcte';
+                    }
+                    return null;
+                  },
+                ),
+              ],
+            ),
           ),
         ),
         ElevatedButton(
