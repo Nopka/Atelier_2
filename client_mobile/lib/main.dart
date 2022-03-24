@@ -51,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      resizeToAvoidBottomInset: false,
       body: Home(),
       floatingActionButton: FloatingActionButton(
         onPressed: addEvent,
