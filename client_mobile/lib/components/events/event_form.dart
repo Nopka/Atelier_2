@@ -1,6 +1,8 @@
 import 'package:client_mobile/models/event.dart';
 import 'package:flutter/material.dart';
-import 'package:client_mobile/data/events_collection.dart';
+//import 'package:responsive_grid/responsive_grid.dart';
+//import 'package:client_mobile/data/events_collection.dart';
+//import 'package:flutter_responsive/flutter_responsive.dart';
 
 class EventForm extends StatefulWidget {
   const EventForm({
@@ -20,8 +22,8 @@ class _EventFormState extends State<EventForm> {
   final _formKey = GlobalKey<FormState>();
 
   final titreController = TextEditingController();
-  final DescController = TextEditingController();
-  final LieuController = TextEditingController();
+  final descController = TextEditingController();
+  final lieuController = TextEditingController();
 
   static final now = DateTime.now();
   DateTime selectedDate = now;
@@ -53,7 +55,7 @@ class _EventFormState extends State<EventForm> {
                     },
                   ),
                   TextFormField(
-                    controller: DescController,
+                    controller: descController,
                     decoration: const InputDecoration(
                       hintText: "Description",
                     ),
@@ -75,7 +77,7 @@ class _EventFormState extends State<EventForm> {
                     },
                   ),
                   TextFormField(
-                    controller: LieuController,
+                    controller: lieuController,
                     decoration: const InputDecoration(
                       hintText: "Lieu",
                     ),
@@ -98,9 +100,9 @@ class _EventFormState extends State<EventForm> {
                   String message = "";
                   Event event = Event(
                       titre: titreController.text,
-                      description: DescController.text,
+                      description: descController.text,
                       date: selectedDate,
-                      lieu: LieuController.text,
+                      lieu: lieuController.text,
                       idCreateur: 'test');
                   if (widget.task != null) {
                     // widget.tasksCollection
