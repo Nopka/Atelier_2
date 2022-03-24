@@ -21,8 +21,14 @@ class _CreateEventState extends State<CreateEvent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        leading: BackButton(color: Colors.black),
+        title: Text(
+          widget.title,
+          style: const TextStyle(color: Colors.black),
+        ),
         centerTitle: true,
+        toolbarHeight: 60,
+        backgroundColor: Colors.white,
       ),
       body: EventForm(
           //tasksCollection: widget.tasksCollection,

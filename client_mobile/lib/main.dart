@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       /*theme: ThemeData(
         primarySwatch: Colors.blue,
       ),*/
-      theme: ThemeData(fontFamily: 'Oswald', brightness: Brightness.dark),
+      theme: ThemeData(fontFamily: 'Oswald'),
       home: const MyHomePage(title: 'Reunionou Home page'),
     );
   }
@@ -49,7 +49,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: const TextStyle(color: Colors.black),
+        ),
+        centerTitle: true,
+        toolbarHeight: 60,
+        backgroundColor: Colors.white,
       ),
       resizeToAvoidBottomInset: false,
       body: Home(),
