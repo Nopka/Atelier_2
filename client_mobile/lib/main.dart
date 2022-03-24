@@ -1,63 +1,41 @@
+import 'package:client_mobile/components/events/event_details.dart';
+import 'package:client_mobile/data/events_collection.dart';
 import 'package:client_mobile/screens/create_event.dart';
-import 'package:client_mobile/screens/home.dart';
+import 'package:client_mobile/screens/all_events.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  //runApp(const Reunionou());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => EventsCollection()),
+    ],
+    child: const Reunionou(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class Reunionou extends StatelessWidget {
+  const Reunionou({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      /*theme: ThemeData(
+        title: 'Flutter Demo',
+        /*theme: ThemeData(
         primarySwatch: Colors.blue,
       ),*/
-      theme: ThemeData(fontFamily: 'Oswald', brightness: Brightness.dark),
-      home: const MyHomePage(title: 'Reunionou Home page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  void addEvent() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => CreateEvent(
-          title: "Créer Event",
-          //tasksCollection: ,
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      resizeToAvoidBottomInset: false,
-      body: Home(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: addEvent,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
+        theme: ThemeData(fontFamily: 'Oswald'),
+        //home: const MyHomePage(title: 'Reunionou Home page'),
+        initialRoute: AllEvents.route,
+        routes: {
+          AllEvents.route: (context) => AllEvents(
+                title: 'Reunionou',
+              ),
+          CreateEvent.route: (context) =>
+              const CreateEvent(title: 'Créer Events'),
+          EventDetails.route: (context) =>
+              const EventDetails(title: 'Event Details'),
+        });
   }
 }

@@ -81,7 +81,8 @@ class REUAuthController //extends Controller
     }
 
     public function deleteUser($user) {
-        
+
+        //var_dump($user->id);
         $date_now= new  \DateTime();
         $date_12month = date('Y-m-d H:i:s', strtotime("+12 months", strtotime( $user['last_connected'])));
 

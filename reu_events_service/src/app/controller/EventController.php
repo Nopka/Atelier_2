@@ -223,7 +223,6 @@ class EventController
     }
 
     public function deleteEvents(Request $req, Response $resp, array $args): Response {
-        //pour supprimer un event, on récupère son token passé par un header ou en paramètre à la variable token.
 
         $listIdEvents = Event::select(['id'])->get();
 
@@ -231,7 +230,7 @@ class EventController
             'lenght' => 0,
             'events' => []
         ];
-
+        //pour chaque event on verifie s'il est expirer ou pas par son id
         foreach($listIdEvents as $idEvent) {
             $event = Event::find($idEvent->id);
 

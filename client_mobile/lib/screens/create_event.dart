@@ -1,5 +1,5 @@
 import 'package:client_mobile/components/events/event_form.dart';
-import 'package:client_mobile/data/events_collection.dart';
+//import 'package:client_mobile/data/events_collection.dart';
 import 'package:flutter/material.dart';
 
 class CreateEvent extends StatefulWidget {
@@ -10,6 +10,7 @@ class CreateEvent extends StatefulWidget {
   }) : super(key: key);
 
   final String title;
+  static String get route => '/createEvent';
   //final EventsCollection tasksCollection;
 
   @override
@@ -21,12 +22,19 @@ class _CreateEventState extends State<CreateEvent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        leading: const BackButton(color: Colors.black),
+        title: Text(
+          widget.title,
+          style: const TextStyle(color: Colors.black),
+        ),
         centerTitle: true,
+        toolbarHeight: 60,
+        backgroundColor: Colors.white,
       ),
-      body: EventForm(
+      body: const EventForm(
           //tasksCollection: widget.tasksCollection,
           ),
+      backgroundColor: Colors.lightGreen[300],
     );
   }
 }
