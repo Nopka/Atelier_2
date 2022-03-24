@@ -4,27 +4,27 @@ import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
 class Event {
-  int id;
+  int? id;
   String titre;
   String description;
   DateTime date;
   String lieu;
   String idCreateur;
-  String token;
-  DateTime createdAt;
-  DateTime updateAt;
+  String? token;
+  DateTime? createdAt;
+  DateTime? updateAt;
 
   // Constructor, with syntactic sugar for assignment to members.
   Event(
-      {required this.id,
+      {this.id,
       required this.titre,
       required this.description,
       required this.date,
       required this.lieu,
       required this.idCreateur,
-      required this.token,
-      required this.createdAt,
-      required this.updateAt});
+      this.token,
+      this.createdAt,
+      this.updateAt});
 
   /// Connect the generated function to the `fromJson`
   /// factory.

@@ -19,96 +19,109 @@ class EventForm extends StatefulWidget {
 class _EventFormState extends State<EventForm> {
   final _formKey = GlobalKey<FormState>();
 
-  final myController = TextEditingController();
+  final titreController = TextEditingController();
+  final DescController = TextEditingController();
+  final LieuController = TextEditingController();
 
   static final now = DateTime.now();
   DateTime selectedDate = now;
   final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
-  final last = now.add(const Duration(days: 32));
+  final last = now.add(const Duration(days: 365));
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Form(
-          key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                TextFormField(
-                  controller: myController,
-                  decoration: const InputDecoration(
-                    hintText: "Titre",
+    final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: titreController,
+                    decoration: const InputDecoration(
+                      hintText: "Titre",
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Veuillez rentrez une valeur correcte';
+                      }
+                      return null;
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Veuillez rentrez une valeur correcte';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: myController,
-                  decoration: const InputDecoration(
-                    hintText: "Description",
+                  TextFormField(
+                    controller: DescController,
+                    decoration: const InputDecoration(
+                      hintText: "Description",
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Veuillez rentrez une valeur correcte';
+                      }
+                      return null;
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Veuillez rentrez une valeur correcte';
-                    }
-                    return null;
-                  },
-                ),
-                CalendarDatePicker(
-                  initialDate: now,
-                  firstDate: now,
-                  lastDate: last,
-                  onDateChanged: (DateTime? value) {
-                    setState(() {
-                      selectedDate = value!;
-                    });
-                  },
-                ),
-                TextFormField(
-                  controller: myController,
-                  decoration: const InputDecoration(
-                    hintText: "Lieu",
+                  CalendarDatePicker(
+                    initialDate: now,
+                    firstDate: now,
+                    lastDate: last,
+                    onDateChanged: (DateTime? value) {
+                      setState(() {
+                        selectedDate = value!;
+                      });
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Veuillez rentrez une valeur correcte';
-                    }
-                    return null;
-                  },
-                ),
-              ],
+                  TextFormField(
+                    controller: LieuController,
+                    decoration: const InputDecoration(
+                      hintText: "Lieu",
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Veuillez rentrez une valeur correcte';
+                      }
+                      return null;
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            // Validate returns true if the form is valid, or false otherwise.
-            if (_formKey.currentState!.validate()) {
-              String message = "";
-              if (widget.task != null) {
-                // widget.tasksCollection
-                //     .update(widget.task!, myController.text, completed);
-                message = "L'évenement à était modifier !";
-              } else {
-                // widget.tasksCollection.create(myController.text, completed);
-                message = "L'évenement à était créer !";
-              }
+          if (!isKeyboard)
+            ElevatedButton(
+              onPressed: () {
+                // Validate returns true if the form is valid, or false otherwise.
+                if (_formKey.currentState!.validate()) {
+                  String message = "";
+                  Event event = Event(
+                      titre: titreController.text,
+                      description: DescController.text,
+                      date: selectedDate,
+                      lieu: LieuController.text,
+                      idCreateur: 'test');
+                  if (widget.task != null) {
+                    // widget.tasksCollection
+                    //     .update(widget.task!, myController.text, completed);
+                    message =
+                        "L'évenement " + event.titre + " à était modifier !";
+                  } else {
+                    // widget.tasksCollection.create(myController.text, completed);
+                    message = "L'évenement " + event.titre + " à était créer !";
+                  }
 
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(message)),
-              );
-              Navigator.pop(context);
-            }
-          },
-          child: const Text('Submit'),
-        ),
-      ],
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(message)),
+                  );
+                  Navigator.pop(context);
+                }
+              },
+              child: const Text('Submit'),
+            ),
+        ],
+      ),
     );
   }
 }
