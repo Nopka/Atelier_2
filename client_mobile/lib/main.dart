@@ -1,3 +1,4 @@
+import 'package:client_mobile/screens/create_event.dart';
 import 'package:client_mobile/screens/home.dart';
 import 'package:flutter/material.dart';
 
@@ -13,10 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
+      /*theme: ThemeData(
         primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Reuionou Home page'),
+      ),*/
+      theme: ThemeData(fontFamily: 'Oswald', brightness: Brightness.dark),
+      home: const MyHomePage(title: 'Reunionou Home page'),
     );
   }
 }
@@ -31,8 +33,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  void _incrementCounter() {
-    setState(() {});
+  void addEvent() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CreateEvent(
+          title: "Créer Event",
+          //tasksCollection: ,
+        ),
+      ),
+    );
   }
 
   @override
@@ -43,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Home(),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: addEvent,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
