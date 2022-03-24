@@ -44,5 +44,5 @@ Vue.component("Header", () =>
 Vue.component("Footer", () =>
     import ("@/components/Footer.vue"));
 
-Vue.component("Eventform", () =>
-    import ("@/components/Eventform.vue"));
+Vue.component("backoHeader", () =>
+    import ("@/components/backoHeader.vue"));

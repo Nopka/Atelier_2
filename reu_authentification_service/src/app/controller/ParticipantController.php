@@ -70,7 +70,6 @@ class ParticipantController //extends Controller
             return $clientError($req, $resp, 404, "Event not found" . $e->getMessage());
         }
 
-       
     }
 
    

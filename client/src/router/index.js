@@ -45,6 +45,12 @@ const routes = [{
         component: () =>
             import ('../views/DetailEvent.vue')
     },
+    {
+        path: '/backoffice',
+        name: 'backoffice',
+        component: () =>
+            import ('../views/backoffice.vue')
+    },
 ]
 
 const router = new VueRouter({

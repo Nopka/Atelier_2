@@ -51,4 +51,18 @@ class backofficeController
         $resp->getBody()->write($response->getBody());
         return writer::json_output($resp, $response->getStatusCode());
     }
+
+    public function auth(Request $req, Response $resp, array $args): Response{
+        $client = new \GuzzleHttp\Client([
+            'base_uri' => $this->c->get('settings')['auth_service'],
+            'timeout' => 5.0
+        ]);
+
+       //$headers = ['Authorization' => explode(" ", $rq->getHeader('Authorization')[1])[1]];
+        $response = $client->post('/auth' /* , $headers */ );
+
+        $resp->getBody()->write($response->getBody());
+        return writer::json_output($resp, $response->getStatusCode());
+    }
+   
 }
