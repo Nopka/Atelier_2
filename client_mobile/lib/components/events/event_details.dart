@@ -1,4 +1,4 @@
-import 'package:client_mobile/models/task.dart';
+import 'package:client_mobile/models/event.dart';
 import 'package:flutter/material.dart';
 //import 'package:provider/provider.dart';
 // import 'package:todolist/data/tasks_collection.dart';

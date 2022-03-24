@@ -1,7 +1,6 @@
-import 'package:client_mobile/models/task.dart';
+import 'package:client_mobile/models/event.dart';
 import 'package:flutter/material.dart';
-// import 'package:todolist/data/tasks_collection.dart';
-// import 'package:todolist/models/task.dart';
+import 'package:client_mobile/data/events_collection.dart';
 
 class TaskForm extends StatefulWidget {
   const TaskForm({Key? key, this.task, required this.tasksCollection})
@@ -18,13 +17,11 @@ class _TaskFormState extends State<TaskForm> {
   final _formKey = GlobalKey<FormState>();
 
   final myController = TextEditingController();
-  bool completed = false;
 
-  @override
-  void initState() {
-    super.initState();
-    //completed = widget.task?.id ?? false;
-  }
+  static final now = DateTime.now();
+  DateTime selectedDate = now;
+  final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
+  final last = now.add(const Duration(days: 32));
 
   @override
   Widget build(BuildContext context) {
@@ -37,34 +34,37 @@ class _TaskFormState extends State<TaskForm> {
               TextFormField(
                 controller: myController,
                 decoration: const InputDecoration(
-                  hintText: "Texte",
+                  hintText: "Titre",
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter some text';
+                    return 'Veuillez rentrez une valeur correcte';
                   }
                   return null;
                 },
               ),
-              Checkbox(
-                value: completed,
-                onChanged: (bool? value) {
+              TextFormField(
+                controller: myController,
+                decoration: const InputDecoration(
+                  hintText: "Description",
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Veuillez rentrez une valeur correcte';
+                  }
+                  return null;
+                },
+              ),
+              CalendarDatePicker(
+                initialDate: now,
+                firstDate: now,
+                lastDate: last,
+                onDateChanged: (DateTime? value) {
                   setState(() {
-                    completed = value!;
+                    selectedDate = value!;
                   });
                 },
               ),
-              // TextFormField(
-              //   decoration: const InputDecoration(
-              //     hintText: "Date de création",
-              //   ),
-              //   validator: (value) {
-              //     if (value == null || value.isEmpty) {
-              //       return 'Please enter some text';
-              //     }
-              //     return null;
-              //   },
-              // ),
             ],
           ),
         ),
@@ -72,29 +72,19 @@ class _TaskFormState extends State<TaskForm> {
           onPressed: () {
             // Validate returns true if the form is valid, or false otherwise.
             if (_formKey.currentState!.validate()) {
-              // If the form is valid, display a snackbar. In the real world,
-              // you'd often call a server or save the information in a database.
               String message = "";
               if (widget.task != null) {
                 // widget.tasksCollection
                 //     .update(widget.task!, myController.text, completed);
-                message = "La tâche à était modifier !";
+                message = "L'évenement à était modifier !";
               } else {
                 // widget.tasksCollection.create(myController.text, completed);
-                // message = "La tâche à était créer !";
+                message = "L'évenement à était créer !";
               }
 
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(message)),
               );
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const AllTasks(
-              //       title: "All Tasks",
-              //     ),
-              //   ),
-              // );
               Navigator.pop(context);
             }
           },

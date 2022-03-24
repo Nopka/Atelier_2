@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 //import 'dart:convert';
 
-class TasksCollection extends ChangeNotifier {
+class EventsCollection extends ChangeNotifier {
   // void create(String content, bool completed) {
   //   int lastItemIndex = data.taskList.length;
   //   data.taskList.insert(

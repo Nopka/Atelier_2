@@ -1,30 +1,29 @@
-import 'package:client_mobile/models/task.dart';
+import 'package:client_mobile/models/event.dart';
 import 'package:flutter/material.dart';
-//import 'package:todolist/models/task.dart';
 
 class TaskMaster extends StatelessWidget {
   const TaskMaster(
-      {Key? key, required this.tasks, required this.callbackSetTask})
+      {Key? key, required this.events, required this.callbackSetTask})
       : super(key: key);
 
-  final List<Event> tasks;
+  final List<Event> events;
   final Function callbackSetTask;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.builder(
-        itemCount: tasks.length,
+        itemCount: events.length,
         itemBuilder: (context, index) {
           return Container(
             child: Row(
               children: [
                 Expanded(
                   child: ListTile(
-                    title: Text(tasks[index].titre),
+                    title: Text(events[index].titre),
                     textColor: Colors.green,
                     onTap: () {
-                      callbackSetTask(tasks[index]);
+                      callbackSetTask(events[index]);
                     },
                   ),
                 ),

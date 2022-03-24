@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'task.g.dart';
+//part 'task.g.dart';
 
 @JsonSerializable()
 class Event {
@@ -28,8 +28,8 @@ class Event {
 
   /// Connect the generated function to the `fromJson`
   /// factory.
-  factory Event.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
+  //factory Event.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
 
   /// Connect the generated function to the `toJson` method.
-  Map<String, dynamic> toJson() => _$TaskToJson(this);
+  //Map<String, dynamic> toJson() => _$TaskToJson(this);
 }
