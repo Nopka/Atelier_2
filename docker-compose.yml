@@ -123,5 +123,8 @@ services:
       - '62368:8080'
     networks:
       - reu.net
+    depends_on:
+      - mysql.users
+      - mysql.events
     
 
