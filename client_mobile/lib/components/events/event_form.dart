@@ -1,6 +1,8 @@
 import 'package:client_mobile/models/event.dart';
 import 'package:flutter/material.dart';
+//import 'package:responsive_grid/responsive_grid.dart';
 //import 'package:client_mobile/data/events_collection.dart';
+//import 'package:flutter_responsive/flutter_responsive.dart';
 
 class EventForm extends StatefulWidget {
   const EventForm({

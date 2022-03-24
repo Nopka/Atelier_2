@@ -1,5 +1,5 @@
 import 'package:client_mobile/components/events/event_form.dart';
-import 'package:client_mobile/data/events_collection.dart';
+//import 'package:client_mobile/data/events_collection.dart';
 import 'package:flutter/material.dart';
 
 class CreateEvent extends StatefulWidget {
@@ -20,13 +20,9 @@ class _CreateEventState extends State<CreateEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        centerTitle: true,
-      ),
       body: EventForm(
-          //tasksCollection: widget.tasksCollection,
-          ),
+            //tasksCollection: widget.tasksCollection,
+            ),
     );
   }
 }

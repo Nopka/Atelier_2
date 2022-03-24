@@ -3,27 +3,51 @@ import 'package:client_mobile/screens/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const Reunionou());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class Reunionou extends StatelessWidget {
+  const Reunionou({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
-      title: 'Flutter Demo',
-      /*theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),*/
-      theme: ThemeData(fontFamily: 'Oswald', brightness: Brightness.dark),
-      home: const MyHomePage(title: 'Reunionou Home page'),
+      title: 'Reunionou',
+      theme: ThemeData(fontFamily: 'Oswald'),
+      //home: const MyHomePage(title: 'Reunionou'),
+      home: Scaffold(
+        appBar: AppBar(
+        //title: Text(widg, style:const TextStyle(color: Colors.black),),
+        centerTitle: true,
+        toolbarHeight: 60,
+        backgroundColor: Colors.white,
+      ),
+      backgroundColor: Colors.lightGreen[300],
+      body: Home(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+        /*     Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const CreateEvent(
+                  title: "Créer Event",
+                  //tasksCollection: ,
+                ),
+              ),
+            ); */
+        },
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
+      ),
+      
+      
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+/* class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
@@ -37,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CreateEvent(
+        builder: (context) => const CreateEvent(
           title: "Créer Event",
           //tasksCollection: ,
         ),
@@ -49,7 +73,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title, style:const TextStyle(color: Colors.black),),
+        centerTitle: true,
+        toolbarHeight: 60,
+        backgroundColor: Colors.white,
       ),
       body: Home(),
       floatingActionButton: FloatingActionButton(
@@ -57,6 +84,10 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
+      backgroundColor: Colors.lightGreen[300],
+
     );
+
   }
 }
+ */
