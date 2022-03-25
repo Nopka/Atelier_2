@@ -3,13 +3,8 @@ import 'package:client_mobile/models/event.dart';
 import 'package:client_mobile/screens/create_event.dart';
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:provider/provider.dart';
-import '../components/events/event_details.dart';
-=======
 import 'package:responsive_grid/responsive_grid.dart';
 //import '../components/events/event_details.dart';
->>>>>>> 50cd0e4253cefb8b79ce0a3c99babda6977ed8bb
 
 class AllEvents extends StatefulWidget {
   const AllEvents({Key? key, required this.title}) : super(key: key);
@@ -71,10 +66,10 @@ class _AllEventsState extends State<AllEvents> {
                 ResponsiveGridCol(
                   lg: 12,
                   child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
-                    ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white,
+                      ),
                       margin: const EdgeInsets.all(10),
                       height: 160,
                       alignment: const Alignment(0, 0),
@@ -82,7 +77,8 @@ class _AllEventsState extends State<AllEvents> {
                         children: [
                           Align(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5.0),
                               child: Text(
                                 widget.title,
                                 style: const TextStyle(
@@ -105,13 +101,13 @@ class _AllEventsState extends State<AllEvents> {
                           fontSize: 30,
                           color: Colors.black),
                     ), */
-                  ),
+                      ),
                 ),
               ]),
             ),
             Container(
               padding: const EdgeInsets.all(5),
-              child:  const Text("Your profil is under construction!!"),
+              child: const Text("Your profil is under construction!!"),
             ),
           ],
         ),
