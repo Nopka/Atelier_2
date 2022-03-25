@@ -8,11 +8,12 @@ part of 'event.dart';
 
 Event _$EventFromJson(Map<String, dynamic> json) => Event(
       id: json['id'] as int?,
-      titre: json['titre'] as String,
-      description: json['description'] as String,
-      date: DateTime.parse(json['date'] as String),
-      lieu: json['lieu'] as String,
-      idCreateur: json['idCreateur'] as String,
+      titre: json['titre'] as String?,
+      description: json['description'] as String?,
+      date:
+          json['date'] == null ? null : DateTime.parse(json['date'] as String),
+      lieu: json['lieu'] as String?,
+      idCreateur: json['idCreateur'] as String?,
       token: json['token'] as String?,
       createdAt: json['createdAt'] == null
           ? null

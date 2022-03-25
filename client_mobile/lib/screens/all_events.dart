@@ -1,4 +1,4 @@
-import 'package:client_mobile/data/events_collection.dart';
+import 'package:client_mobile/components/users/user_profile.dart';
 import 'package:client_mobile/models/event.dart';
 import 'package:client_mobile/screens/create_event.dart';
 //import 'package:flutter/cupertino.dart';
@@ -105,10 +105,7 @@ class _AllEventsState extends State<AllEvents> {
                 ),
               ]),
             ),
-            Container(
-              padding: const EdgeInsets.all(5),
-              child: const Text("Your profil is under construction!!"),
-            ),
+            UserProfile(),
           ],
         ),
         floatingActionButton: FloatingActionButton(
