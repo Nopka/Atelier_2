@@ -22,11 +22,7 @@ class Reunionou extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
-        /*theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),*/
         theme: ThemeData(fontFamily: 'Oswald'),
-        //home: const MyHomePage(title: 'Reunionou Home page'),
         initialRoute: AllEvents.route,
         routes: {
           AllEvents.route: (context) => const AllEvents(

@@ -27,6 +27,7 @@ class _EventFormState extends State<EventForm> {
 
   static final now = DateTime.now();
   DateTime selectedDate = now;
+  //DateTime pickedDate;
   final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
   final last = now.add(const Duration(days: 365));
 
@@ -39,10 +40,11 @@ class _EventFormState extends State<EventForm> {
           Form(
             key: _formKey,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(15.0),
               child: Column(
-                children: [
+                children: <Widget> [
                   TextFormField(
+                    style: const TextStyle(fontSize: 24),
                     controller: titreController,
                     decoration: const InputDecoration(
                       hintText: "Titre",
@@ -66,16 +68,42 @@ class _EventFormState extends State<EventForm> {
                       return null;
                     },
                   ),
-                  CalendarDatePicker(
-                    initialDate: now,
-                    firstDate: now,
-                    lastDate: last,
-                    onDateChanged: (DateTime? value) {
-                      setState(() {
-                        selectedDate = value!;
-                      });
-                    },
+                 
+              /*     CalendarDatePicker(
+                            initialDate: now,
+                            firstDate: now,
+                            lastDate: last,
+                            onDateChanged: (DateTime? value) {
+                              setState(() {
+                                selectedDate = value!;
+                              });
+                            },
+                  ), 
+                  */
+                  TextFormField(
+                    controller: lieuController,
+                    decoration: const InputDecoration(
+                      hintText: "date",
+                      suffixIcon: Icon(Icons.calendar_today),  
                   ),
+                  readOnly: true,
+                  onTap: () async{
+                    CalendarDatePicker(
+                            initialDate: now,
+                            firstDate: now,
+                            lastDate: last,
+                            onDateChanged: (DateTime? value) {
+                              setState(() {
+                                selectedDate = value!;
+                              });
+                            },
+                     );
+                  },
+                    
+
+                  ),
+                /*    */
+                 
                   TextFormField(
                     controller: lieuController,
                     decoration: const InputDecoration(
@@ -128,3 +156,8 @@ class _EventFormState extends State<EventForm> {
     );
   }
 }
+
+
+
+
+

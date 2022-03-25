@@ -24,7 +24,8 @@ class EventDetails extends StatelessWidget {
         toolbarHeight: 60,
         backgroundColor: Colors.white,
       ),
-      body: (ListView(children: <Widget>[
+      body: (
+        ListView(children: <Widget>[
         //Padding(padding: EdgeInsets.zero,),
         Container(
             margin: const EdgeInsets.only(
@@ -40,8 +41,10 @@ class EventDetails extends StatelessWidget {
                     //color: Colors.purple,
                     child: const Text(
                       "Event title",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                          color: Colors.white),
                     ),
                   ),
                 ),
@@ -54,7 +57,7 @@ class EventDetails extends StatelessWidget {
                     //color: Colors.green,
                     child: const Text(
                       "Cafe Place Stanislas",
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   ),
                 ),
@@ -67,52 +70,10 @@ class EventDetails extends StatelessWidget {
                     //color: Colors.orange,
                     child: const Text(
                       "Le 30/03/2022",
-                      style: TextStyle(fontSize: 19),
+                      style: TextStyle(fontSize: 19, color: Colors.white),
                     ),
                   ),
                 ),
-                ResponsiveGridCol(
-                  xs: 6,
-                  md: 3,
-                  child: Container(
-                    height: 100,
-                    alignment: const Alignment(0, 0),
-                    // color: Colors.green,
-                    child: SimpleElevatedButton(
-                      child: const Text("Je viens"),
-                      color: Colors.green,
-                      onPressed: () {},
-                    ),
-                  ),
-                ),
-                ResponsiveGridCol(
-                  xs: 6,
-                  md: 3,
-                  child: Container(
-                    height: 100,
-                    alignment: const Alignment(0, 0),
-                    //color: Colors.red,
-                    child: SimpleElevatedButton(
-                      child: const Text("Je viens pas"),
-                      color: Colors.red,
-                      onPressed: () {},
-                    ),
-                  ),
-                ),
-                /*     ResponsiveGridCol(
-                  lg: 12,
-                  child: Container(
-                    height: 40,
-                    alignment: const Alignment(0, 0),
-                    //color: Colors.orange,
-                    child: //const Text("go to chat"),
-                          SimpleElevatedButton(
-                                  child: const Text("go to chat"),
-                                  color: Colors.orange,
-                                  onPressed: () {},
-                            ),
-                  ),
-                ), */
                 ResponsiveGridCol(
                   lg: 12,
                   child: Container(
@@ -120,7 +81,7 @@ class EventDetails extends StatelessWidget {
                     height: 40,
                     child: const Text(
                       "Description:",
-                      style: TextStyle(fontSize: 25),
+                      style: TextStyle(fontSize: 25, color: Colors.white),
                     ),
                   ),
                 ),
@@ -131,7 +92,7 @@ class EventDetails extends StatelessWidget {
                     height: 40,
                     child: const Text(
                       "here is a description for the event",
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 20, color: Colors.white),
                     ),
                   ),
                 ),
@@ -145,6 +106,48 @@ class EventDetails extends StatelessWidget {
                     child: const Text(
                       "THE MAP",
                       style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                ),
+                ResponsiveGridCol(
+                  xs: 4,
+                  md: 2,
+                  child: Container(
+                    height: 100,
+                    alignment: const Alignment(0, 0),
+                    // color: Colors.green,
+                    child: SimpleElevatedButton(
+                      child: const Text("Je viens"),
+                      color: Colors.green,
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
+                ResponsiveGridCol(
+                  xs: 4,
+                  md: 2,
+                  child: Container(
+                    height: 100,
+                    alignment: const Alignment(0, 0),
+                    //color: Colors.red,
+                    child: SimpleElevatedButton(
+                      child: const Text("Je viens pas"),
+                      color: Colors.red,
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
+                ResponsiveGridCol(
+                  xs: 4,
+                  md: 2,
+                  child: Container(
+                    height: 100,
+                    alignment: const Alignment(0, 0),
+                    // color: Colors.green,
+                    child: SimpleElevatedButton(
+                      child: const Text("Chat"),
+                      color: Colors.green,
+                      onPressed: () {},
                     ),
                   ),
                 ),
@@ -162,7 +165,7 @@ class SimpleElevatedButton extends StatelessWidget {
       this.color,
       this.onPressed,
       this.borderRadius = 6,
-      this.padding = const EdgeInsets.symmetric(horizontal: 28, vertical: 20),
+      this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       Key? key})
       : super(key: key);
   final Color? color;
