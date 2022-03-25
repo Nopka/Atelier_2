@@ -1,9 +1,6 @@
 //import 'package:client_mobile/models/event.dart';
 import 'package:flutter/material.dart';
 //import 'package:provider/provider.dart';
-// import 'package:todolist/data/tasks_collection.dart';
-// import 'package:todolist/models/task.dart';
-// import 'package:todolist/screens/one_task.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 class EventDetails extends StatelessWidget {

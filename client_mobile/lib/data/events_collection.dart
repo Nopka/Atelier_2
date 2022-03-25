@@ -1,4 +1,5 @@
 //import 'package:client_mobile/models/task.dart';
+import 'package:client_mobile/models/event.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 //import 'dart:convert';
@@ -32,20 +33,17 @@ class EventsCollection extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-  getData() async {
-    String url = "https://jsonplaceholder.typicode.com/todos";
+  Future<Event> getData() async {
+    String url = "http://api.events.local:62360/events";
     Dio dio = Dio();
-    //List<Event> tasklist = [];
     dio.options.headers['content-Type'] = 'application/json';
     dio.options.headers['Accept'] = 'application/json';
     var response = await dio.get(url);
-
+    print(response);
     if (response.statusCode == 200) {
-      //var tasksData = jsonDecode(response.data)[0];
-      //log(taskData.toString());
-      //print(tasksData);
-      //Task.fromJson(tasksData);
-      //return data.taskList;
+      var data = response.data;
+      print(data);
+      return data;
     } else {
       throw Exception("Something gone wrong, ${response.statusCode}");
     }

@@ -29,7 +29,7 @@ class Reunionou extends StatelessWidget {
         //home: const MyHomePage(title: 'Reunionou Home page'),
         initialRoute: AllEvents.route,
         routes: {
-          AllEvents.route: (context) => AllEvents(
+          AllEvents.route: (context) => const AllEvents(
                 title: 'Reunionou',
               ),
           CreateEvent.route: (context) =>

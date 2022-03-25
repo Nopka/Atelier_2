@@ -108,10 +108,11 @@ class _EventFormState extends State<EventForm> {
                     // widget.tasksCollection
                     //     .update(widget.task!, myController.text, completed);
                     message =
-                        "L'évenement " + event.titre + " à était modifier !";
+                        "L'évenement " + event.titre! + " à était modifier !";
                   } else {
                     // widget.tasksCollection.create(myController.text, completed);
-                    message = "L'évenement " + event.titre + " à était créer !";
+                    message =
+                        "L'évenement " + event.titre! + " à était créer !";
                   }
 
                   ScaffoldMessenger.of(context).showSnackBar(
