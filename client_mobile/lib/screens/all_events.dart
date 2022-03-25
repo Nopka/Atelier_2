@@ -1,10 +1,8 @@
 import 'package:client_mobile/components/users/user_profile.dart';
 import 'package:client_mobile/models/event.dart';
 import 'package:client_mobile/screens/create_event.dart';
-//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_grid/responsive_grid.dart';
-//import '../components/events/event_details.dart';
 
 class AllEvents extends StatefulWidget {
   const AllEvents({Key? key, required this.title}) : super(key: key);
@@ -36,6 +34,8 @@ class _AllEventsState extends State<AllEvents> {
       Navigator.pushNamed(context, CreateEvent.route);
     }
 
+    // Future<Event> listEvent = EventsCollection.getData();
+    // debugPrint(listEvent.toString());
     return DefaultTabController(
       length: 2,
       child: Scaffold(

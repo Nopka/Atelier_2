@@ -33,16 +33,16 @@ class EventsCollection extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-  Future<Event> getData() async {
-    String url = "http://api.events.local:62360/events";
+  static Future<Event> getData() async {
+    String url = "docketu.iutnc.univ-lorraine.fr:62370/events";
     Dio dio = Dio();
     dio.options.headers['content-Type'] = 'application/json';
     dio.options.headers['Accept'] = 'application/json';
     var response = await dio.get(url);
-    print(response);
+    debugPrint(response.toString());
     if (response.statusCode == 200) {
       var data = response.data;
-      print(data);
+      debugPrint(data);
       return data;
     } else {
       throw Exception("Something gone wrong, ${response.statusCode}");
