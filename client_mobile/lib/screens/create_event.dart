@@ -10,6 +10,7 @@ class CreateEvent extends StatefulWidget {
   }) : super(key: key);
 
   final String title;
+  static String get route => '/createEvent';
   //final EventsCollection tasksCollection;
 
   @override
@@ -20,9 +21,20 @@ class _CreateEventState extends State<CreateEvent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: EventForm(
-            //tasksCollection: widget.tasksCollection,
-            ),
+      appBar: AppBar(
+        leading: const BackButton(color: Colors.black),
+        title: Text(
+          widget.title,
+          style: const TextStyle(color: Colors.black),
+        ),
+        centerTitle: true,
+        toolbarHeight: 60,
+        backgroundColor: Colors.white,
+      ),
+      body: const EventForm(
+          //tasksCollection: widget.tasksCollection,
+          ),
+      backgroundColor: Colors.lightGreen[300],
     );
   }
 }

@@ -1,9 +1,18 @@
+import 'package:client_mobile/components/events/event_details.dart';
+import 'package:client_mobile/data/events_collection.dart';
 import 'package:client_mobile/screens/create_event.dart';
-import 'package:client_mobile/screens/home.dart';
+import 'package:client_mobile/screens/all_events.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const Reunionou());
+  //runApp(const Reunionou());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => EventsCollection()),
+    ],
+    child: const Reunionou(),
+  ));
 }
 
 class Reunionou extends StatelessWidget {
@@ -11,83 +20,18 @@ class Reunionou extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return MaterialApp(
-      title: 'Reunionou',
-      theme: ThemeData(fontFamily: 'Oswald'),
-      //home: const MyHomePage(title: 'Reunionou'),
-      home: Scaffold(
-        appBar: AppBar(
-        //title: Text(widg, style:const TextStyle(color: Colors.black),),
-        centerTitle: true,
-        toolbarHeight: 60,
-        backgroundColor: Colors.white,
-      ),
-      backgroundColor: Colors.lightGreen[300],
-      body: Home(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-        /*     Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const CreateEvent(
-                  title: "Créer Event",
-                  //tasksCollection: ,
-                ),
+        title: 'Flutter Demo',
+        theme: ThemeData(fontFamily: 'Oswald'),
+        initialRoute: AllEvents.route,
+        routes: {
+          AllEvents.route: (context) => AllEvents(
+                title: 'Reunionou',
               ),
-            ); */
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-      ),
-      
-      
-    );
+          CreateEvent.route: (context) =>
+              const CreateEvent(title: 'Créer Events'),
+          EventDetails.route: (context) =>
+              const EventDetails(title: 'Event Details'),
+        });
   }
 }
-
-/* class MyHomePage extends  {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  void addEvent() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const CreateEvent(
-          title: "Créer Event",
-          //tasksCollection: ,
-        ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title, style:const TextStyle(color: Colors.black),),
-        centerTitle: true,
-        toolbarHeight: 60,
-        backgroundColor: Colors.white,
-      ),
-      body: Home(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: addEvent,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-      backgroundColor: Colors.lightGreen[300],
-
-    );
-
-  }
-}
- */
