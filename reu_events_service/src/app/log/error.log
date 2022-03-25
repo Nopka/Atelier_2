@@ -27,3 +27,6 @@
 [2022-03-21T14:34:26.126341+00:00] lbs.log.ERROR: Missing token in event route [] []
 [2022-03-21T15:29:11.134156+00:00] lbs.log.ERROR: DELETE http://api.events.local:19080/events/b003100b-1d95-4734-8982-b40f498c4e68/ : bad method - GET, PUT wanted [] []
 [2022-03-21T15:37:21.645624+00:00] lbs.log.ERROR: error: invalid input ["\"06-03-2021\" must be greater than or equal to \"now\""] []
+[2022-03-25T09:47:21.522998+00:00] lbs.log.ERROR: GET http://api.events.local:62360/favicon.ico : malformed uri [] []
+[2022-03-25T10:00:18.061109+00:00] lbs.log.ERROR: GET http://localhost:62360/ : malformed uri [] []
+[2022-03-25T10:03:03.092476+00:00] lbs.log.ERROR: GET http://localhost:62360/ : malformed uri [] []
