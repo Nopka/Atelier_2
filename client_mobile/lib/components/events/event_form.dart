@@ -1,5 +1,6 @@
 import 'package:client_mobile/models/event.dart';
 import 'package:flutter/material.dart';
+import '../map.dart';
 //import 'package:responsive_grid/responsive_grid.dart';
 //import 'package:client_mobile/data/events_collection.dart';
 //import 'package:flutter_responsive/flutter_responsive.dart';
@@ -26,10 +27,11 @@ class _EventFormState extends State<EventForm> {
   final lieuController = TextEditingController();
 
   static final now = DateTime.now();
-  DateTime selectedDate = now;
-  //DateTime pickedDate;
-  final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
-  final last = now.add(const Duration(days: 365));
+  //DateTime now = DateTime.now();
+
+  DateTime selectedDate = DateTime.now();
+  //final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
+  //final last = now.add(const Duration(days: 365));
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class _EventFormState extends State<EventForm> {
             child: Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
-                children: <Widget> [
+                children: <Widget>[
                   TextFormField(
                     style: const TextStyle(fontSize: 24),
                     controller: titreController,
@@ -68,8 +70,8 @@ class _EventFormState extends State<EventForm> {
                       return null;
                     },
                   ),
-                 
-              /*     CalendarDatePicker(
+
+                  /*     CalendarDatePicker(
                             initialDate: now,
                             firstDate: now,
                             lastDate: last,
@@ -84,11 +86,12 @@ class _EventFormState extends State<EventForm> {
                     controller: lieuController,
                     decoration: const InputDecoration(
                       hintText: "date",
-                      suffixIcon: Icon(Icons.calendar_today),  
-                  ),
-                  readOnly: true,
-                  onTap: () async{
-                    CalendarDatePicker(
+                      suffixIcon: Icon(Icons.calendar_today),
+                    ),
+                    //readOnly: true,
+                    onTap: () {
+                      //selectDatePiker(context);
+                      /*   CalendarDatePicker(
                             initialDate: now,
                             firstDate: now,
                             lastDate: last,
@@ -97,13 +100,22 @@ class _EventFormState extends State<EventForm> {
                                 selectedDate = value!;
                               });
                             },
-                     );
-                  },
-                    
-
+                     ); */
+                    },
                   ),
-                /*    */
-                 
+                  /*    */
+                  TextFormField(
+                    controller: lieuController,
+                    decoration: const InputDecoration(
+                      hintText: "Heure",
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Veuillez rentrez une valeur correcte';
+                      }
+                      return null;
+                    },
+                  ),
                   TextFormField(
                     controller: lieuController,
                     decoration: const InputDecoration(
@@ -116,6 +128,13 @@ class _EventFormState extends State<EventForm> {
                       return null;
                     },
                   ),
+                  Container(
+                    height: 300,
+                    margin: const EdgeInsets.all(10),
+                    alignment: const Alignment(0, 0),
+                    color: Colors.grey,
+                    child: const Mapp(),
+                  )
                 ],
               ),
             ),
@@ -155,8 +174,3 @@ class _EventFormState extends State<EventForm> {
     );
   }
 }
-
-
-
-
-

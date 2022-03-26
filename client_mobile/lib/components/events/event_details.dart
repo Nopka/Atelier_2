@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 // import 'package:todolist/screens/one_task.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
+import '../map.dart';
+
 class EventDetails extends StatelessWidget {
   const EventDetails({Key? key, required this.title}) : super(key: key);
   //final Event? event;
@@ -27,8 +29,7 @@ class EventDetails extends StatelessWidget {
         toolbarHeight: 60,
         backgroundColor: Colors.white,
       ),
-      body: (
-        ListView(children: <Widget>[
+      body: (ListView(children: <Widget>[
         //Padding(padding: EdgeInsets.zero,),
         Container(
             margin: const EdgeInsets.only(
@@ -47,8 +48,24 @@ class EventDetails extends StatelessWidget {
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 30,
-                          color: Colors.white),
+                          color: Colors.black),
                     ),
+                  ),
+                ),
+                ResponsiveGridCol(
+                  xs: 6,
+                  md: 3,
+                  child: Column(
+                    children: const [
+                      Text(
+                        "Le 30/03/2022",
+                        style: TextStyle(fontSize: 19, color: Colors.black),
+                      ),
+                      Text(
+                        " A 20h",
+                        style: TextStyle(fontSize: 19, color: Colors.black),
+                      ),
+                    ],
                   ),
                 ),
                 ResponsiveGridCol(
@@ -60,20 +77,7 @@ class EventDetails extends StatelessWidget {
                     //color: Colors.green,
                     child: const Text(
                       "Cafe Place Stanislas",
-                      style: TextStyle(fontSize: 20, color: Colors.white),
-                    ),
-                  ),
-                ),
-                ResponsiveGridCol(
-                  xs: 6,
-                  md: 3,
-                  child: Container(
-                    height: 50,
-                    alignment: const Alignment(0, 0),
-                    //color: Colors.orange,
-                    child: const Text(
-                      "Le 30/03/2022",
-                      style: TextStyle(fontSize: 19, color: Colors.white),
+                      style: TextStyle(fontSize: 20, color: Colors.black),
                     ),
                   ),
                 ),
@@ -81,10 +85,11 @@ class EventDetails extends StatelessWidget {
                   lg: 12,
                   child: Container(
                     padding: const EdgeInsets.all(2.0),
+                    margin: const EdgeInsets.all(6.0),
                     height: 40,
                     child: const Text(
                       "Description:",
-                      style: TextStyle(fontSize: 25, color: Colors.white),
+                      style: TextStyle(fontSize: 25, color: Colors.black),
                     ),
                   ),
                 ),
@@ -95,7 +100,7 @@ class EventDetails extends StatelessWidget {
                     height: 40,
                     child: const Text(
                       "here is a description for the event",
-                      style: TextStyle(fontSize: 20, color: Colors.white),
+                      style: TextStyle(fontSize: 20, color: Colors.black),
                     ),
                   ),
                 ),
@@ -106,10 +111,7 @@ class EventDetails extends StatelessWidget {
                     height: 300,
                     alignment: const Alignment(0, 0),
                     color: Colors.grey,
-                    child: const Text(
-                      "THE MAP",
-                      style: TextStyle(fontSize: 20),
-                    ),
+                    child: const Mapp(),
                   ),
                 ),
                 ResponsiveGridCol(
