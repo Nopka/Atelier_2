@@ -35,7 +35,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final ButtonStyle style = ElevatedButton.styleFrom(
       textStyle: const TextStyle(fontSize: 20),
-      primary: Colors.indigo.shade800,
+      primary: Colors.green.shade600,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
     );
 
