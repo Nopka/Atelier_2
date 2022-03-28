@@ -3,6 +3,7 @@ import 'package:client_mobile/data/events_collection.dart';
 import 'package:client_mobile/screens/create_event.dart';
 import 'package:client_mobile/screens/all_events.dart';
 import 'package:client_mobile/components/log_in.dart';
+import 'package:client_mobile/screens/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,9 +25,12 @@ class Reunionou extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(fontFamily: 'Oswald'),
-        initialRoute: AllEvents.route,
+        initialRoute: Navigation.route,
         routes: {
-          AllEvents.route: (context) => const AllEvents(
+          Navigation.route: (context) => const Navigation(
+              // title: 'Reunionou',
+              ),
+          AllEvents.route: (context) => AllEvents(
                 title: 'Reunionou',
               ),
           CreateEvent.route: (context) =>
