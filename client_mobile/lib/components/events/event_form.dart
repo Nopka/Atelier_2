@@ -1,6 +1,13 @@
+import 'dart:convert';
+
 import 'package:client_mobile/models/event.dart';
 import 'package:flutter/material.dart';
 import '../map.dart';
+import 'dart:async';
+import 'package:dio/dio.dart';
+
+import 'package:http/http.dart' as http;
+
 //import 'package:responsive_grid/responsive_grid.dart';
 //import 'package:client_mobile/data/events_collection.dart';
 //import 'package:flutter_responsive/flutter_responsive.dart';
@@ -17,6 +24,30 @@ class EventForm extends StatefulWidget {
 
   @override
   State<EventForm> createState() => _EventFormState();
+}
+
+class LatLong {
+  double lat;
+  double long;
+
+  LatLong({required this.lat, required this.long});
+
+  double get latitude => lat;
+  double get longitude => long;
+
+  factory LatLong.fromJson(Map<String, dynamic> json) {
+    return LatLong(lat: json['lat'], long: json['lon']);
+  }
+}
+
+Future<LatLong> getCurrentLocation() async {
+  var dio = Dio();
+  Response responseAPI = await dio.get("http://ip-api.com/json/");
+  if (responseAPI.statusCode == 200) {
+    return LatLong.fromJson(responseAPI.data);
+  } else {
+    throw Exception('Failed to fetch your location');
+  }
 }
 
 class _EventFormState extends State<EventForm> {
@@ -36,6 +67,8 @@ class _EventFormState extends State<EventForm> {
   @override
   Widget build(BuildContext context) {
     final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
+    final currentLocation = getCurrentLocation();
+    print(currentLocation);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -133,7 +166,10 @@ class _EventFormState extends State<EventForm> {
                     margin: const EdgeInsets.all(10),
                     alignment: const Alignment(0, 0),
                     color: Colors.grey,
-                    child: const Mapp(),
+                    child: Mapp(
+                      lat: 0,
+                      long: 0,
+                    ),
                   )
                 ],
               ),

@@ -108,7 +108,10 @@ class EventDetails extends StatelessWidget {
                     height: 300,
                     alignment: const Alignment(0, 0),
                     color: Colors.grey,
-                    child: const Mapp(),
+                    child: const Mapp(
+                      lat: 12.0,
+                      long: 14.0,
+                    ),
                   ),
                 ),
                 ResponsiveGridCol(
