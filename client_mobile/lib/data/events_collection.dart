@@ -1,4 +1,6 @@
 //import 'package:client_mobile/models/task.dart';
+import 'dart:convert';
+
 import 'package:client_mobile/models/event.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -33,19 +35,4 @@ class EventsCollection extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-  static Future<Event> getData() async {
-    String url = "docketu.iutnc.univ-lorraine.fr:62370/events";
-    Dio dio = Dio();
-    dio.options.headers['content-Type'] = 'application/json';
-    dio.options.headers['Accept'] = 'application/json';
-    var response = await dio.get(url);
-    debugPrint(response.toString());
-    if (response.statusCode == 200) {
-      var data = response.data;
-      debugPrint(data);
-      return data;
-    } else {
-      throw Exception("Something gone wrong, ${response.statusCode}");
-    }
-  }
 }

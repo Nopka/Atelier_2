@@ -1,4 +1,5 @@
 import 'package:client_mobile/components/users/user_profile.dart';
+import 'package:client_mobile/data/events_collection.dart';
 import 'package:client_mobile/models/event.dart';
 import 'package:client_mobile/screens/create_event.dart';
 import 'package:flutter/material.dart';
@@ -34,8 +35,8 @@ class _AllEventsState extends State<AllEvents> {
       Navigator.pushNamed(context, CreateEvent.route);
     }
 
-    // Future<Event> listEvent = EventsCollection.getData();
-    // debugPrint(listEvent.toString());
+    Future<Event> listEvent = EventsCollection.getData();
+    debugPrint(listEvent.toString());
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -62,10 +63,11 @@ class _AllEventsState extends State<AllEvents> {
             Container(
               alignment: Alignment.bottomCenter,
               width: 100,
-              child: ResponsiveGridRow(children: [
-                ResponsiveGridCol(
-                  lg: 12,
-                  child: Container(
+              child: ResponsiveGridRow(
+                children: [
+                  ResponsiveGridCol(
+                    lg: 12,
+                    child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.white,
@@ -92,18 +94,11 @@ class _AllEventsState extends State<AllEvents> {
                             alignment: Alignment.topCenter,
                           ),
                         ],
-                      )
-
-                      /* const Text(
-                      "Event title",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30,
-                          color: Colors.black),
-                    ), */
                       ),
-                ),
-              ]),
+                    ),
+                  ),
+                ],
+              ),
             ),
             UserProfile(),
           ],
