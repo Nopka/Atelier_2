@@ -30,21 +30,18 @@ class LatLong {
   double lat;
   double long;
 
+  // double get latitude => lat;
+  // double get longitude => long;
+
   LatLong({required this.lat, required this.long});
-
-  double get latitude => lat;
-  double get longitude => long;
-
-  factory LatLong.fromJson(Map<String, dynamic> json) {
-    return LatLong(lat: json['lat'], long: json['lon']);
-  }
 }
 
 Future<LatLong> getCurrentLocation() async {
   var dio = Dio();
   Response responseAPI = await dio.get("http://ip-api.com/json/");
+  // print(responseAPI.toString());
   if (responseAPI.statusCode == 200) {
-    return LatLong.fromJson(responseAPI.data);
+    return LatLong(lat: responseAPI.data['lat'], long: responseAPI.data['lon']);
   } else {
     throw Exception('Failed to fetch your location');
   }
@@ -67,8 +64,7 @@ class _EventFormState extends State<EventForm> {
   @override
   Widget build(BuildContext context) {
     final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
-    final currentLocation = getCurrentLocation();
-    print(currentLocation);
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -162,15 +158,23 @@ class _EventFormState extends State<EventForm> {
                     },
                   ),
                   Container(
-                    height: 300,
-                    margin: const EdgeInsets.all(10),
-                    alignment: const Alignment(0, 0),
-                    color: Colors.grey,
-                    child: Mapp(
-                      lat: 0,
-                      long: 0,
-                    ),
-                  )
+                      height: 300,
+                      margin: const EdgeInsets.all(10),
+                      alignment: const Alignment(0, 0),
+                      color: Colors.grey,
+                      child: FutureBuilder<LatLong>(
+                        future: getCurrentLocation(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return Mapp(
+                                lat: snapshot.data!.lat,
+                                long: snapshot.data!.long);
+                          } else {
+                            return const CircularProgressIndicator();
+                          }
+                        },
+                      ))
                 ],
               ),
             ),
