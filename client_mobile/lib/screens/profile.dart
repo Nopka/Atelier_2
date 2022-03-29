@@ -1,3 +1,4 @@
+import 'package:client_mobile/components/log_in.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../components/events/event_details.dart';
@@ -10,6 +11,18 @@ class Profile extends StatelessWidget {
     List<String> data = prefs.getStringList('user') ?? [];
     //print(data);
     return data;
+  }
+
+  removeData() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('access-token');
+      await prefs.remove('refresh-token');
+      await prefs.remove('user');
+      return 'Toutes les données on était supprimer, vous allez être déconnecter !';
+    } catch (e) {
+      return 'Problème lors de la suppression !';
+    }
   }
 
   @override
@@ -37,7 +50,25 @@ class Profile extends StatelessWidget {
                   child: SimpleElevatedButton(
                     child: const Text("Se deconnecter"),
                     color: Colors.orange,
-                    onPressed: () {},
+                    onPressed: () {
+                      removeData().then((result) {
+                        showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                                  title: const Text('Message'),
+                                  content: Text(result),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text('OK'),
+                                      onPressed: () {
+                                        Navigator.pushNamed(
+                                            context, LoginPage.route);
+                                      },
+                                    ),
+                                  ],
+                                ));
+                      });
+                    },
                   ),
                 )
               ]);
