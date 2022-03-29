@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../map.dart';
 import 'dart:async';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //import 'package:responsive_grid/responsive_grid.dart';
 //import 'package:client_mobile/data/events_collection.dart';
@@ -55,6 +56,12 @@ class _EventFormState extends State<EventForm> {
   DateTime selectedDate = DateTime.now();
   //final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
   //final last = now.add(const Duration(days: 365));
+
+  getIDUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String> data = prefs.getStringList('user') ?? [];
+    return data[0];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -175,36 +182,47 @@ class _EventFormState extends State<EventForm> {
             ),
           ),
           if (!isKeyboard)
-            ElevatedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false otherwise.
-                if (_formKey.currentState!.validate()) {
-                  String message = "";
-                  Event event = Event(
-                      titre: titreController.text,
-                      description: descController.text,
-                      date: selectedDate,
-                      lieu: lieuController.text,
-                      idCreateur: 'test');
-                  if (widget.task != null) {
-                    // widget.tasksCollection
-                    //     .update(widget.task!, myController.text, completed);
-                    message =
-                        "L'évenement " + event.titre! + " à était modifier !";
-                  } else {
-                    // widget.tasksCollection.create(myController.text, completed);
-                    message =
-                        "L'évenement " + event.titre! + " à était créer !";
-                  }
+            FutureBuilder<dynamic>(
+                future: getIDUser(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        // Validate returns true if the form is valid, or false otherwise.
+                        if (_formKey.currentState!.validate()) {
+                          String message = "";
+                          //print(snapshot.data);
+                          Event event = Event(
+                              titre: titreController.text,
+                              description: descController.text,
+                              date: selectedDate,
+                              lieu: lieuController.text,
+                              idCreateur: snapshot.data);
+                          if (widget.task != null) {
+                            // widget.tasksCollection
+                            //     .update(widget.task!, myController.text, completed);
+                            message = "L'évenement " +
+                                event.titre! +
+                                " à était modifier !";
+                          } else {
+                            // widget.tasksCollection.create(myController.text, completed);
+                            message = "L'évenement " +
+                                event.titre! +
+                                " à était créer !";
+                          }
 
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(message)),
-                  );
-                  Navigator.pop(context);
-                }
-              },
-              child: const Text('Submit'),
-            ),
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(message)),
+                          );
+                          Navigator.pop(context);
+                        }
+                      },
+                      child: const Text('Submit'),
+                    );
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                }),
         ],
       ),
     );

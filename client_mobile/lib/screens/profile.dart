@@ -1,53 +1,76 @@
 import 'package:flutter/material.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../components/events/event_details.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return ListView(physics: const BouncingScrollPhysics(), children: <Widget>[
-      Container(
-          padding: const EdgeInsets.all(15),
-          margin: const EdgeInsets.all(40),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: Colors.white,
-          ),
-          child: Column(children: <Widget>[_headerUser(), _infoUser()])),
-      Container(
-        padding: const EdgeInsets.all(0),
-        child: SimpleElevatedButton(
-          child: const Text("Se deconnecter"),
-          color: Colors.orange,
-          onPressed: () {},
-        ),
-      )
-    ]);
+  getUser() async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String> data = prefs.getStringList('user') ?? [];
+    //print(data);
+    return data;
   }
 
-  _headerUser() => Column(children: <Widget>[
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<dynamic>(
+      future: getUser(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return ListView(
+              physics: const BouncingScrollPhysics(),
+              children: <Widget>[
+                Container(
+                    padding: const EdgeInsets.all(15),
+                    margin: const EdgeInsets.all(40),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.white,
+                    ),
+                    child: Column(children: <Widget>[
+                      _headerUser(snapshot.data[1]),
+                      _infoUser(snapshot.data)
+                    ])),
+                Container(
+                  padding: const EdgeInsets.all(0),
+                  child: SimpleElevatedButton(
+                    child: const Text("Se deconnecter"),
+                    color: Colors.orange,
+                    onPressed: () {},
+                  ),
+                )
+              ]);
+        } else {
+          return const CircularProgressIndicator();
+        }
+      },
+    );
+  }
+
+  _headerUser(username) => Column(children: <Widget>[
         Container(
             padding: const EdgeInsets.all(0),
             height: 80,
             child: const Icon(Icons.supervised_user_circle, size: 90)),
         const SizedBox(height: 12.0),
-        const Text('Username',
-            style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 20.0,
-                color: Colors.orange)),
+        username != null
+            ? Text(username,
+                style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 20.0,
+                    color: Colors.orange))
+            : const Text(''),
       ]);
 
-  _infoUser() {
+  _infoUser(userData) {
     return Container(
       padding: const EdgeInsets.all(0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           const SizedBox(height: 40.0),
-          _email(),
+          _email(userData[2]),
           const SizedBox(height: 12.0),
           _mobile(),
           const SizedBox(height: 12.0),
@@ -60,19 +83,19 @@ class Profile extends StatelessWidget {
     );
   }
 
-  _email() {
+  _email(email) {
     return Row(children: <Widget>[
       _prefixIcon(Icons.email),
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Email',
+        children: [
+          const Text('Email',
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 15.0,
                   color: Colors.grey)),
-          SizedBox(height: 1),
-          Text('user@gmail.com')
+          const SizedBox(height: 1),
+          email != null ? Text(email) : const Text(''),
         ],
       )
     ]);

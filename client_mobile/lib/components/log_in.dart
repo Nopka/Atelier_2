@@ -16,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
 
   Widget userInput(TextEditingController userInput, String hintTitle,
-      TextInputType keyboardType) {
+      TextInputType keyboardType, bool visible) {
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
@@ -25,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Padding(
         padding: const EdgeInsets.only(left: 25.0, right: 25),
         child: TextField(
+          obscureText: visible,
           controller: userInput,
           decoration: InputDecoration(
             hintText: hintTitle,
@@ -46,8 +47,6 @@ class _LoginPageState extends State<LoginPage> {
       primary: Colors.green.shade600,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
     );
-
-    String message = '';
 
     return Scaffold(
       body: Container(
@@ -78,10 +77,10 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const SizedBox(height: 45),
-                    userInput(
-                        emailController, 'Email', TextInputType.emailAddress),
+                    userInput(emailController, 'Email',
+                        TextInputType.emailAddress, false),
                     userInput(passwordController, 'Password',
-                        TextInputType.visiblePassword),
+                        TextInputType.visiblePassword, true),
                     Container(
                       height: 55,
                       padding:
@@ -111,7 +110,6 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            message != '' ? Text(message) : Container(),
           ],
         ),
       ),
