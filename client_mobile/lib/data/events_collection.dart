@@ -1,9 +1,6 @@
 //import 'package:client_mobile/models/task.dart';
-import 'dart:convert';
 
-import 'package:client_mobile/models/event.dart';
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 //import 'dart:convert';
 
 class EventsCollection extends ChangeNotifier {

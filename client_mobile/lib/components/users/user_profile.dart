@@ -7,7 +7,8 @@ class UserProfile extends StatelessWidget {
       id: 1,
       username: 'test',
       email: 'test.téstetr@gmail.com',
-      description: 'Miam le kebab');
+      description: 'Miam le kebab',
+      password: "test");
   //final Function callbackResetEvent;
 
   @override
