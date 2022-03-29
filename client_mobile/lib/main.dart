@@ -37,7 +37,7 @@ class Reunionou extends StatelessWidget {
               const CreateEvent(title: 'Créer Events'),
           EventDetails.route: (context) =>
               const EventDetails(title: 'Event Details'),
-          LoginPage.route: (context) => LoginPage(),
+          LoginPage.route: (context) => const LoginPage(),
         });
   }
 }

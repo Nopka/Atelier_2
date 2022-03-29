@@ -56,6 +56,9 @@ flutter:
     - family: Oswald
       fonts:
         - asset: assets/fonts/Oswald/static/Oswald-Regular.ttf
+  assets:   
+    - assets/
+    - assets/images/
 
 flutter_native_splash: # page de démarrage
   color: "#006064"

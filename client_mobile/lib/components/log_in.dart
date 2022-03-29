@@ -1,10 +1,18 @@
+import 'package:client_mobile/models/user.dart';
+import 'package:client_mobile/screens/navigation.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
   static String get route => '/loginPage';
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
 
   Widget userInput(TextEditingController userInput, String hintTitle,
@@ -39,13 +47,15 @@ class LoginPage extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
     );
 
+    String message = '';
+
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
             alignment: Alignment.topCenter,
             image: AssetImage(
-              'images/group.png',
+              'assets/images/group.png',
             ),
           ),
         ),
@@ -80,14 +90,28 @@ class LoginPage extends StatelessWidget {
                           child: const Text('Log In'),
                           style: style,
                           onPressed: () {
-                            print(emailController);
-                            print(passwordController);
+                            Future<List> data = User.getData(
+                                emailController.text, passwordController.text);
+                            data.then((data) {
+                              if (data[0]["message"] == null) {
+                                Navigator.pushNamed(context, Navigation.route);
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (_) => AlertDialog(
+                                          title: const Text('Erreur'),
+                                          content: Text(
+                                              data[0]["message"].toString()),
+                                        ));
+                              }
+                            });
                           }),
                     )
                   ],
                 ),
               ),
             ),
+            message != '' ? Text(message) : Container(),
           ],
         ),
       ),

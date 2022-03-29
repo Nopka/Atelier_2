@@ -1,6 +1,6 @@
 import 'package:client_mobile/models/event.dart';
+import 'package:client_mobile/screens/navigation.dart';
 import 'package:flutter/material.dart';
-import '../components/events/event_details.dart';
 
 class AllEvents extends StatefulWidget {
   const AllEvents({Key? key, required this.title}) : super(key: key);
@@ -71,7 +71,7 @@ class _AllEventsState extends State<AllEvents> {
                 TextButton(
                   child: const Text('go to Event Details'),
                   onPressed: () {
-                    Navigator.pushNamed(context, EventDetails.route);
+                    Navigator.pushNamed(context, Navigation.route);
                   },
                 ),
               ],
