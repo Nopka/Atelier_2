@@ -30,23 +30,25 @@ class EventsCollection extends ChangeNotifier {
         options: Options(headers: <String, dynamic>{'Authorization': auth}));
     int i = 0;
     if (responseInvitationsUser.statusCode == 200) {
+      //print(responseInvitationsUser.data['invitations']);
       for (var e in responseInvitationsUser.data['invitations']) {
-        print(e['idEvent']);
+        //print(e["idEvent"]);
         String urlInfoEvent =
             "http://docketu.iutnc.univ-lorraine.fr:62364/events/" +
-                e['idEvent'];
+                e["idEvent"];
         var responseInfoEvent = await dio.get(urlInfoEvent,
             options:
                 Options(headers: <String, dynamic>{'Authorization': auth}));
+        //print(responseInfoEvent.data);
         if (responseInfoEvent.statusCode == 200) {
           Event ajoutEvent = Event(
-              id: responseInfoEvent.data['id'],
-              titre: responseInfoEvent.data['titre'],
-              description: responseInfoEvent.data['description'],
-              lieu: responseInfoEvent.data['lieu'],
-              idCreateur: responseInfoEvent.data['idCreateur'],
-              date: responseInfoEvent.data['dateEvent'],
-              createdAt: responseInfoEvent.data['created_at']);
+              id: responseInfoEvent.data["event"]['id'],
+              titre: responseInfoEvent.data["event"]['titre'],
+              description: responseInfoEvent.data["event"]['description'],
+              lieu: responseInfoEvent.data["event"]['lieu'],
+              idCreateur: responseInfoEvent.data["event"]['idCreateur'],
+              date: responseInfoEvent.data["event"]['dateEvent'],
+              createdAt: responseInfoEvent.data["event"]['created_at']);
           event.insert(i, ajoutEvent);
           i++;
         } else {
