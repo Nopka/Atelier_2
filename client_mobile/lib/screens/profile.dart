@@ -221,7 +221,7 @@ class Profile extends StatelessWidget {
           child: Icon(
             iconData,
             size: 20,
-            color: Colors.grey,
+            color: const Color.fromARGB(255, 43, 82, 21),
           )),
     );
   }

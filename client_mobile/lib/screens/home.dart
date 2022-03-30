@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:client_mobile/screens/profile.dart';
 import '../components/events/event_form.dart';
-import 'all_events.dart';
+import 'event.dart';
 
-class Navigation extends StatelessWidget {
-  const Navigation({Key? key}) : super(key: key);
-  static String get route => '/navigation';
+class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+  static String get route => '/Home';
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +36,8 @@ class Navigation extends StatelessWidget {
             ),
           ),
           body: TabBarView(children: <Widget>[
-            Container(
-              color: Colors.lightGreen[300],
-              child:
-                  ListView(padding: const EdgeInsets.all(16), children: const [
-                AllEvents(title: 'Event title'),
-                AllEvents(title: 'Event title'),
-                AllEvents(title: 'Event title'),
-                AllEvents(title: 'Event title'),
-              ]),
+            const Center(
+              child: Event(),
             ),
             Container(
               padding: const EdgeInsets.all(5),
