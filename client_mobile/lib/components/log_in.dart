@@ -1,5 +1,5 @@
 import 'package:client_mobile/models/user.dart';
-import 'package:client_mobile/screens/navigation.dart';
+import 'package:client_mobile/screens/home.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                                 emailController.text, passwordController.text);
                             data.then((data) {
                               if (data[0]["message"] == null) {
-                                Navigator.pushNamed(context, Navigation.route);
+                                Navigator.pushNamed(context, Home.route);
                               } else {
                                 showDialog(
                                     context: context,
