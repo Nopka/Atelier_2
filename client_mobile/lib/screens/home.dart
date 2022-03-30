@@ -13,6 +13,7 @@ class Home extends StatelessWidget {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
+            leading: Container(),
             title: const Text(
               'Reunionou',
               style: TextStyle(color: Colors.black),
