@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import '../../data/events_collection.dart';
 import 'package:provider/provider.dart';
-
 import '../map.dart';
+import 'package:dio/dio.dart';
 
 class EventDetails extends StatefulWidget {
   const EventDetails({Key? key, required this.title}) : super(key: key);
@@ -15,6 +15,28 @@ class EventDetails extends StatefulWidget {
 
   @override
   State<EventDetails> createState() => _EventDetailsState();
+}
+
+class LatLong {
+  double lat;
+  double long;
+
+  LatLong({required this.lat, required this.long});
+}
+
+Future<LatLong> getEventLocation(String address) async {
+  var dio = Dio();
+  Response responseAPI = await dio.get(
+      "https://api.geoapify.com/v1/geocode/search?text=" +
+          address +
+          "&apiKey=feb8d3c41d7747c7a7cd3b367fb9c161");
+  if (responseAPI.statusCode == 200) {
+    return LatLong(
+        lat: responseAPI.data['features'][0]['properties']['lat'],
+        long: responseAPI.data['features'][0]['properties']['lon']);
+  } else {
+    throw Exception('Failed to fetch your location');
+  }
 }
 
 class _EventDetailsState extends State<EventDetails> {
@@ -116,15 +138,23 @@ class _EventDetailsState extends State<EventDetails> {
                           ResponsiveGridCol(
                             lg: 12,
                             child: Container(
-                              //padding: const EdgeInsets.all(2.0),
-                              height: 300,
-                              alignment: const Alignment(0, 0),
-                              color: Colors.grey,
-                              child: const Mapp(
-                                lat: 48.741173,
-                                long: 1.954309,
-                              ),
-                            ),
+                                height: 300,
+                                alignment: const Alignment(0, 0),
+                                color: Colors.grey,
+                                child: FutureBuilder<LatLong>(
+                                  future: getEventLocation(
+                                      snapshot.data[args].lieu),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      return Mapp(
+                                          lat: snapshot.data!.lat,
+                                          long: snapshot.data!.long);
+                                    } else {
+                                      return const CircularProgressIndicator();
+                                    }
+                                  },
+                                )),
                           ),
                           ResponsiveGridCol(
                             xs: 3,
