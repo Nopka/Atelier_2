@@ -31,6 +31,7 @@ class EventsCollection extends ChangeNotifier {
     int i = 0;
     if (responseInvitationsUser.statusCode == 200) {
       for (var e in responseInvitationsUser.data['invitations']) {
+        print(e['idEvent']);
         String urlInfoEvent =
             "http://docketu.iutnc.univ-lorraine.fr:62364/events/" +
                 e['idEvent'];
