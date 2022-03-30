@@ -20,6 +20,7 @@ class EventDetails extends StatefulWidget {
 class _EventDetailsState extends State<EventDetails> {
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       appBar: AppBar(
         leading: const BackButton(color: Colors.black),
@@ -52,7 +53,7 @@ class _EventDetailsState extends State<EventDetails> {
                               alignment: const Alignment(0, 0),
                               //color: Colors.purple,
                               child: Text(
-                                snapshot.data[0].titre,
+                                snapshot.data[args].titre,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 30,
@@ -64,15 +65,10 @@ class _EventDetailsState extends State<EventDetails> {
                             xs: 6,
                             md: 3,
                             child: Column(
-                              children: const [
+                              children: [
                                 Text(
-                                  "Le 30/03/2022",
-                                  style: TextStyle(
-                                      fontSize: 19, color: Colors.black),
-                                ),
-                                Text(
-                                  " A 20h",
-                                  style: TextStyle(
+                                  snapshot.data[args].date,
+                                  style: const TextStyle(
                                       fontSize: 19, color: Colors.black),
                                 ),
                               ],
@@ -85,9 +81,9 @@ class _EventDetailsState extends State<EventDetails> {
                               height: 50,
                               alignment: const Alignment(0, 0),
                               //color: Colors.green,
-                              child: const Text(
-                                "Cafe Place Stanislas",
-                                style: TextStyle(
+                              child: Text(
+                                snapshot.data[args].lieu,
+                                style: const TextStyle(
                                     fontSize: 20, color: Colors.black),
                               ),
                             ),
@@ -110,9 +106,9 @@ class _EventDetailsState extends State<EventDetails> {
                             child: Container(
                               padding: const EdgeInsets.all(2.0),
                               height: 40,
-                              child: const Text(
-                                "here is a description for the event",
-                                style: TextStyle(
+                              child: Text(
+                                snapshot.data[args].description,
+                                style: const TextStyle(
                                     fontSize: 20, color: Colors.black),
                               ),
                             ),
