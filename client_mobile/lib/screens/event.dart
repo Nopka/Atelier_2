@@ -97,20 +97,6 @@ class _EventState extends State<Event> {
                         ),
                       ),
                     );
-                    /*  ListTile(
-                      title: Text(snapshot.data[index].titre),
-                      subtitle: Text(snapshot.data[index].lieu),
-                    /*   leading: const Icon(
-                        Icons.person,
-                        color: Colors.deepPurple,
-                      ), */
-                      trailing: TextButton(
-                        child: const Text('voir plus'),
-                        onPressed: () {
-                          Navigator.pushNamed(context, EventDetails.route);
-                        },
-                      ),
-                    ); */
                   },
                 ),
               );

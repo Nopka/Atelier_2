@@ -1,39 +1,79 @@
 import 'package:client_mobile/models/event.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EventsCollection extends ChangeNotifier {
   Future<List<Event>> getEvents() async {
-    String url = "http://docketu.iutnc.univ-lorraine.fr:62370/events";
+    final _prefs = await SharedPreferences.getInstance();
+    List<String> _data = _prefs.getStringList('user') ?? [];
+    var idUser = _data[0];
+    String urlEventUser =
+        "http://docketu.iutnc.univ-lorraine.fr:62364/events/creators/" + idUser;
     Dio dio = Dio();
+
+    final prefs = await SharedPreferences.getInstance();
+    String data = prefs.getString('token') ?? '';
+    String auth = 'Bearer $data';
+
     List<Event> event = [];
     dio.options.headers['content-Type'] = 'application/json';
     dio.options.headers['Accept'] = 'application/json';
 
-    /* Event newEvent = Event(id: 'titre', titre: 'titre',description: 'desc' , lieu: 'lieu', idCreateur: '@username', createdAt: '29/03/2022', date: '30/03/2022'); 
-          event.insert(0, newEvent); */
+    String urlInvitationsUser =
+        "http://docketu.iutnc.univ-lorraine.fr:62364/users/" +
+            idUser +
+            "/invitations";
+    var responseEventUser = await dio.get(urlEventUser,
+        options: Options(headers: <String, dynamic>{'Authorization': auth}));
+    var responseInvitationsUser = await dio.get(urlInvitationsUser,
+        options: Options(headers: <String, dynamic>{'Authorization': auth}));
+    int i = 0;
+    if (responseInvitationsUser.statusCode == 200) {
+      for (var e in responseInvitationsUser.data['invitations']) {
+        String urlInfoEvent =
+            "http://docketu.iutnc.univ-lorraine.fr:62364/events/" +
+                e['idEvent'];
+        var responseInfoEvent = await dio.get(urlInfoEvent,
+            options:
+                Options(headers: <String, dynamic>{'Authorization': auth}));
+        if (responseInfoEvent.statusCode == 200) {
+          Event ajoutEvent = Event(
+              id: responseInfoEvent.data['id'],
+              titre: responseInfoEvent.data['titre'],
+              description: responseInfoEvent.data['description'],
+              lieu: responseInfoEvent.data['lieu'],
+              idCreateur: responseInfoEvent.data['idCreateur'],
+              date: responseInfoEvent.data['dateEvent'],
+              createdAt: responseInfoEvent.data['created_at']);
+          event.insert(i, ajoutEvent);
+          i++;
+        } else {
+          print(
+              "probleme lors de l'obtention des details de l'event via son id");
+        }
+      }
+    } else {
+      throw Exception(
+          "Something gone wrong, ${responseInvitationsUser.statusCode}");
+    }
 
-    var response = await dio.get(url);
-    if (response.statusCode == 200) {
-      //return event.fromJson(response.data);
-      int i = 0;
-      for (var e in response.data['events']) {
+    if (responseEventUser.statusCode == 200) {
+      for (var e in responseEventUser.data['event']) {
         Event newEvent = Event(
-            id: e['event']['id'],
-            titre: e['event']['titre'],
-            description: e['event']['description'],
-            lieu: e['event']['lieu'],
-            idCreateur: e['event']['idCreateur'],
-            date: e['event']['dateEvent'],
-            createdAt: e['event']['created_at']);
+            id: e['id'],
+            titre: e['titre'],
+            description: e['description'],
+            lieu: e['lieu'],
+            idCreateur: e['idCreateur'],
+            date: e['dateEvent'],
+            createdAt: e['created_at']);
         event.insert(i, newEvent);
-
         i++;
       }
     } else {
-      throw Exception("Something gone wrong, ${response.statusCode}");
+      throw Exception("Something gone wrong, ${responseEventUser.statusCode}");
     }
-    //print(event);
     return event;
   }
 }

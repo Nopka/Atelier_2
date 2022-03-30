@@ -53,7 +53,7 @@ class User {
         ];
       }
     } catch (e) {
-      print(e);
+      //print(e);
       return [
         {"message": "Connexion Impossible"}
       ];
