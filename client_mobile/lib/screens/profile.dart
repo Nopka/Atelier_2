@@ -103,12 +103,13 @@ class Profile extends StatelessWidget {
           const SizedBox(height: 40.0),
           _email(userData[2]),
           const SizedBox(height: 12.0),
-          _mobile(),
-          const SizedBox(height: 12.0),
-          _birthDate(),
-          const SizedBox(height: 12.0),
-          _gender(),
-          const SizedBox(height: 12.0),
+          _desc(userData[3]),
+          // _mobile(),
+          // const SizedBox(height: 12.0),
+          // _birthDate(),
+          // const SizedBox(height: 12.0),
+          // _gender(),
+          // const SizedBox(height: 12.0),
         ],
       ),
     );
@@ -132,59 +133,77 @@ class Profile extends StatelessWidget {
     ]);
   }
 
-  _mobile() {
+  _desc(desc) {
     return Row(children: <Widget>[
-      _prefixIcon(Icons.phone),
+      _prefixIcon(Icons.description),
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Mobile',
+        children: [
+          const Text('Description',
               style: TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 15.0,
                   color: Colors.grey)),
-          SizedBox(height: 1),
-          Text('+91 0000000000')
+          const SizedBox(height: 1),
+          desc != null ? Text(desc) : const Text(''),
         ],
       )
     ]);
   }
 
-  _birthDate() {
-    return Row(children: <Widget>[
-      _prefixIcon(Icons.date_range),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Birth date',
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 15.0,
-                  color: Colors.grey)),
-          SizedBox(height: 1),
-          Text('00-00-0000')
-        ],
-      )
-    ]);
-  }
+  // _mobile() {
+  //   return Row(children: <Widget>[
+  //     _prefixIcon(Icons.phone),
+  //     Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: const [
+  //         Text('Mobile',
+  //             style: TextStyle(
+  //                 fontWeight: FontWeight.w700,
+  //                 fontSize: 15.0,
+  //                 color: Colors.grey)),
+  //         SizedBox(height: 1),
+  //         Text('+91 0000000000')
+  //       ],
+  //     )
+  //   ]);
+  // }
 
-  _gender() {
-    return Row(children: <Widget>[
-      _prefixIcon(Icons.person),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text('Gender',
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 15.0,
-                  color: Colors.grey)),
-          SizedBox(height: 1),
-          Text('Male')
-        ],
-      )
-    ]);
-  }
+  // _birthDate() {
+  //   return Row(children: <Widget>[
+  //     _prefixIcon(Icons.date_range),
+  //     Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: const [
+  //         Text('Birth date',
+  //             style: TextStyle(
+  //                 fontWeight: FontWeight.w700,
+  //                 fontSize: 15.0,
+  //                 color: Colors.grey)),
+  //         SizedBox(height: 1),
+  //         Text('00-00-0000')
+  //       ],
+  //     )
+  //   ]);
+  // }
+
+  // _gender() {
+  //   return Row(children: <Widget>[
+  //     _prefixIcon(Icons.person),
+  //     Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: const [
+  //         Text('Gender',
+  //             style: TextStyle(
+  //                 fontWeight: FontWeight.w700,
+  //                 fontSize: 15.0,
+  //                 color: Colors.grey)),
+  //         SizedBox(height: 1),
+  //         Text('Male')
+  //       ],
+  //     )
+  //   ]);
+  // }
 
   _prefixIcon(IconData iconData) {
     return ConstrainedBox(
