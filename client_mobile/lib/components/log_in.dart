@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
-          color: Colors.blueGrey.shade200,
+          color: Colors.green.shade200,
           borderRadius: BorderRadius.circular(30)),
       child: Padding(
         padding: const EdgeInsets.only(left: 25.0, right: 25),
