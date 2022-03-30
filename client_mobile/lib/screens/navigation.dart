@@ -4,14 +4,12 @@ import '../components/events/event_form.dart';
 import 'all_events.dart';
 
 class Navigation extends StatelessWidget {
-  
-  
-  const Navigation({ Key? key }) : super(key: key);
+  const Navigation({Key? key}) : super(key: key);
   static String get route => '/navigation';
 
   @override
   Widget build(BuildContext context) {
-    return  DefaultTabController(
+    return DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: AppBar(
@@ -27,20 +25,25 @@ class Navigation extends StatelessWidget {
               indicatorWeight: 5,
               labelColor: Colors.black,
               tabs: [
-                Tab(icon: Icon(Icons.star, color: Colors.black),text: 'Events'),
+                Tab(
+                    icon: Icon(Icons.star, color: Colors.black),
+                    text: 'Events'),
                 Tab(icon: Icon(Icons.add, color: Colors.black), text: 'Add'),
-                Tab(icon: Icon(Icons.face, color: Colors.black),text: 'Profil'),
+                Tab(
+                    icon: Icon(Icons.face, color: Colors.black),
+                    text: 'Profil'),
               ],
             ),
           ),
           body: TabBarView(children: <Widget>[
             Container(
               color: Colors.lightGreen[300],
-              child: ListView(padding: const EdgeInsets.all(16), children: [
-                 AllEvents(title: 'Event title'),
-                 AllEvents(title: 'Event title'),
-                 AllEvents(title: 'Event title'),
-                 AllEvents(title: 'Event title'),
+              child:
+                  ListView(padding: const EdgeInsets.all(16), children: const [
+                AllEvents(title: 'Event title'),
+                AllEvents(title: 'Event title'),
+                AllEvents(title: 'Event title'),
+                AllEvents(title: 'Event title'),
               ]),
             ),
             Container(
@@ -50,7 +53,7 @@ class Navigation extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.all(5),
-             child: const Profile(),
+              child: const Profile(),
               color: Colors.lightGreen[300],
             ),
           ]),

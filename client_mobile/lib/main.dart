@@ -25,19 +25,19 @@ class Reunionou extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(fontFamily: 'Oswald'),
-        initialRoute: Navigation.route,
+        initialRoute: LoginPage.route,
         routes: {
           Navigation.route: (context) => const Navigation(
               // title: 'Reunionou',
               ),
-          AllEvents.route: (context) => AllEvents(
+          AllEvents.route: (context) => const AllEvents(
                 title: 'Reunionou',
               ),
           CreateEvent.route: (context) =>
               const CreateEvent(title: 'Créer Events'),
           EventDetails.route: (context) =>
               const EventDetails(title: 'Event Details'),
-          LoginPage.route: (context) => LoginPage(),
+          LoginPage.route: (context) => const LoginPage(),
         });
   }
 }

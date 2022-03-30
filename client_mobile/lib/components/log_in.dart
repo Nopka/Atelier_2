@@ -1,14 +1,22 @@
+import 'package:client_mobile/models/user.dart';
+import 'package:client_mobile/screens/navigation.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
   static String get route => '/loginPage';
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
 
   Widget userInput(TextEditingController userInput, String hintTitle,
-      TextInputType keyboardType) {
+      TextInputType keyboardType, bool visible) {
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
       decoration: BoxDecoration(
@@ -17,6 +25,7 @@ class LoginPage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 25.0, right: 25),
         child: TextField(
+          obscureText: visible,
           controller: userInput,
           decoration: InputDecoration(
             hintText: hintTitle,
@@ -45,7 +54,7 @@ class LoginPage extends StatelessWidget {
           image: DecorationImage(
             alignment: Alignment.topCenter,
             image: AssetImage(
-              'images/group.png',
+              'assets/images/group.png',
             ),
           ),
         ),
@@ -68,10 +77,10 @@ class LoginPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const SizedBox(height: 45),
-                    userInput(
-                        emailController, 'Email', TextInputType.emailAddress),
+                    userInput(emailController, 'Email',
+                        TextInputType.emailAddress, false),
                     userInput(passwordController, 'Password',
-                        TextInputType.visiblePassword),
+                        TextInputType.visiblePassword, true),
                     Container(
                       height: 55,
                       padding:
@@ -80,8 +89,21 @@ class LoginPage extends StatelessWidget {
                           child: const Text('Log In'),
                           style: style,
                           onPressed: () {
-                            print(emailController);
-                            print(passwordController);
+                            Future<List> data = User.getData(
+                                emailController.text, passwordController.text);
+                            data.then((data) {
+                              if (data[0]["message"] == null) {
+                                Navigator.pushNamed(context, Navigation.route);
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (_) => AlertDialog(
+                                          title: const Text('Erreur'),
+                                          content: Text(
+                                              data[0]["message"].toString()),
+                                        ));
+                              }
+                            });
                           }),
                     )
                   ],
