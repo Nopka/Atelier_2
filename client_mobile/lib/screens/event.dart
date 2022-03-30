@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../components/events/event_details.dart';
 import '../data/events_collection.dart';
-<<<<<<< HEAD
-// import 'package:client_mobile/models/event.dart' as event_data;
-=======
->>>>>>> 6b0e63b0f59327b4fd15cc31564e8c73c1aecae8
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Event extends StatefulWidget {
