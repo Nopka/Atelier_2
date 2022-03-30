@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import '../../data/events_collection.dart';
 import 'package:provider/provider.dart';
-import 'package:dio/dio.dart';
-
 import '../map.dart';
+import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EventDetails extends StatefulWidget {
   const EventDetails({Key? key, required this.title}) : super(key: key);
@@ -16,14 +16,34 @@ class EventDetails extends StatefulWidget {
 
   static String get route => '/event_details';
 
-  invitation(String resp) async {
+  invitation(String resp, String idEvent) async {
     try {
-      String url = "http://docketu.iutnc.univ-lorraine.fr:62370/invitations/";
+      String url =
+          "http://docketu.iutnc.univ-lorraine.fr:62364/events/participations/" +
+              idEvent;
       Dio dio = Dio();
       dio.options.headers['content-Type'] = 'application/json';
       dio.options.headers['Accept'] = 'application/json';
 
-      var response = await dio.post(url, data: jsonEncode({'response': resp}));
+      final prefs = await SharedPreferences.getInstance();
+      String data = prefs.getString('token') ?? '';
+      String auth = 'Bearer $data';
+
+      final _prefs = await SharedPreferences.getInstance();
+      List<String> _data = _prefs.getStringList('user') ?? [];
+      var idUser = _data[0];
+      print('event '+idEvent);
+      print('id '+idUser);
+
+      var response = await dio.get(url,
+          options: Options(headers: <String, dynamic>{'Authorization': auth}));
+      
+      for (var participation in response.data['resultat']) {
+        print('p id '+participation['idUser']);
+        if (participation['idUser'] == idUser) {
+          print('okokokokokkokokokokokokoko');
+        }
+      }
       if (response.statusCode == 200) {
         return 'votre réponse a été envoyé avec succès';
       } else {
@@ -36,6 +56,28 @@ class EventDetails extends StatefulWidget {
 
   @override
   State<EventDetails> createState() => _EventDetailsState();
+}
+
+class LatLong {
+  double lat;
+  double long;
+
+  LatLong({required this.lat, required this.long});
+}
+
+Future<LatLong> getEventLocation(String address) async {
+  var dio = Dio();
+  Response responseAPI = await dio.get(
+      "https://api.geoapify.com/v1/geocode/search?text=" +
+          address +
+          "&apiKey=feb8d3c41d7747c7a7cd3b367fb9c161");
+  if (responseAPI.statusCode == 200) {
+    return LatLong(
+        lat: responseAPI.data['features'][0]['properties']['lat'],
+        long: responseAPI.data['features'][0]['properties']['lon']);
+  } else {
+    throw Exception('Failed to fetch your location');
+  }
 }
 
 class _EventDetailsState extends State<EventDetails> {
@@ -140,9 +182,19 @@ class _EventDetailsState extends State<EventDetails> {
                                   padding: const EdgeInsets.all(10.0),
                                   height: 300,
                                   alignment: const Alignment(0, 0),
-                                  child: const Mapp(
-                                    lat: 48.741173,
-                                    long: 1.954309,
+                                  child: FutureBuilder<LatLong>(
+                                    future: getEventLocation(
+                                        snapshot.data[args].lieu),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        return Mapp(
+                                            lat: snapshot.data!.lat,
+                                            long: snapshot.data!.long);
+                                      } else {
+                                        return const CircularProgressIndicator();
+                                      }
+                                    },
                                   ),
                                 ),
                               ),
@@ -155,7 +207,8 @@ class _EventDetailsState extends State<EventDetails> {
                                   // color: Colors.green,
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      widget.invitation('oui');
+                                      widget.invitation(
+                                          'oui', snapshot.data[args].id);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       primary: Colors.green,
@@ -176,7 +229,8 @@ class _EventDetailsState extends State<EventDetails> {
                                   //color: Colors.red,
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      widget.invitation('non');
+                                      widget.invitation(
+                                          'non', snapshot.data['id']);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       primary: Colors.red,
