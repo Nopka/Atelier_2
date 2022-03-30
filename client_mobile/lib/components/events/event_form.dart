@@ -50,6 +50,9 @@ class _EventFormState extends State<EventForm> {
   final descController = TextEditingController();
   final lieuController = TextEditingController();
 
+  final heureController = TextEditingController();
+  final dateController = TextEditingController();
+
   //DateTime now = DateTime.now();
 
   DateTime selectedDate = DateTime.now();
@@ -113,7 +116,7 @@ class _EventFormState extends State<EventForm> {
                   ), 
                   */
                   TextFormField(
-                    controller: lieuController,
+                    controller: dateController,
                     decoration: const InputDecoration(
                       hintText: "date (AAAA-MM-JJ)",
                       suffixIcon: Icon(Icons.calendar_today),
@@ -135,7 +138,7 @@ class _EventFormState extends State<EventForm> {
                   ),
                   /*    */
                   TextFormField(
-                    controller: lieuController,
+                    controller: heureController,
                     decoration: const InputDecoration(
                       hintText: "Heure",
                     ),
@@ -202,12 +205,12 @@ class _EventFormState extends State<EventForm> {
                             //     .update(widget.task!, myController.text, completed);
                             message = "L'évenement " +
                                 event.titre! +
-                                " à était modifier !";
+                                " à été modifier !";
                           } else {
                             // widget.tasksCollection.create(myController.text, completed);
                             message = "L'évenement " +
                                 event.titre! +
-                                " à était créer !";
+                                " à été créer !";
                           }
 
                           ScaffoldMessenger.of(context).showSnackBar(
