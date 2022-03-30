@@ -181,7 +181,7 @@ class _EventDetailsState extends State<EventDetails> {
                               // color: Colors.green,
                               child: SimpleElevatedButton(
                                 child: const Text("Lien"),
-                                color: Colors.green,
+                                color: const Color.fromARGB(255, 51, 109, 53),
                                 onPressed: () => showDialog<String>(
                                   context: context,
                                   builder: (BuildContext context) =>

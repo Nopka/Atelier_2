@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import '../components/events/event_details.dart';
 import '../data/events_collection.dart';
 
-
 class Event extends StatefulWidget {
   const Event({Key? key}) : super(key: key);
 
@@ -37,7 +36,7 @@ class _EventState extends State<Event> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                             Center(
+                            Center(
                               child: Text(
                                 snapshot.data[index].titre,
                                 style: const TextStyle(
@@ -45,17 +44,19 @@ class _EventState extends State<Event> {
                                 textAlign: TextAlign.center,
                               ),
                             ),
-                           Text(
-                              'Le '+snapshot.data[index].date.toString(),
+                             const SizedBox(height: 12),
+                            Text(
+                              'Le ' + snapshot.data[index].date.toString(),
                               style: const TextStyle(fontSize: 17),
                             ),
-                             Text(
-                             'Lieu: '+snapshot.data[index].lieu,
+                            Text(
+                              'Lieu: ' + snapshot.data[index].lieu,
                               style: const TextStyle(fontSize: 17),
                             ),
                             const SizedBox(height: 12),
                             Text(
-                              'Ajouter le '+snapshot.data[index].createdAt.toString(),
+                              'Ajouter le ' +
+                                  snapshot.data[index].createdAt.toString(),
                               style: const TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.bold),
                             ),
@@ -63,10 +64,15 @@ class _EventState extends State<Event> {
                               alignment: MainAxisAlignment.start,
                               children: [
                                 TextButton(
-                                  child: const Text('voir plus'),
+                                  child: const Text(
+                                    'voir plus',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
                                   onPressed: () {
                                     Navigator.pushNamed(
-                                        context, EventDetails.route);
+                                        context, EventDetails.route, arguments: {});
                                   },
                                 ),
                               ],
@@ -75,20 +81,6 @@ class _EventState extends State<Event> {
                         ),
                       ),
                     );
-                    /*  ListTile(
-                      title: Text(snapshot.data[index].titre),
-                      subtitle: Text(snapshot.data[index].lieu),
-                    /*   leading: const Icon(
-                        Icons.person,
-                        color: Colors.deepPurple,
-                      ), */
-                      trailing: TextButton(
-                        child: const Text('voir plus'),
-                        onPressed: () {
-                          Navigator.pushNamed(context, EventDetails.route);
-                        },
-                      ),
-                    ); */
                   },
                 ),
               );
