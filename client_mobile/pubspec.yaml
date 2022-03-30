@@ -40,12 +40,8 @@ dependencies:
   responsive_grid: ^2.0.0
   flutter_map: ^0.14.0
   latlong2: ^0.8.1
-<<<<<<< HEAD
   shared_preferences: ^2.0.13
-
-=======
   http: ^0.13.2
->>>>>>> 888c7a6dadeb374dece280bae4c469471180abfd
 
 dev_dependencies:
   flutter_test:
