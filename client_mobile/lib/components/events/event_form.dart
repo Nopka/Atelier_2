@@ -53,11 +53,14 @@ class _EventFormState extends State<EventForm> {
   final heureController = TextEditingController();
   final dateController = TextEditingController();
 
+  //static final now = DateTime.now();
   //DateTime now = DateTime.now();
 
-  DateTime selectedDate = DateTime.now();
-  //final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
-  //final last = now.add(const Duration(days: 365));
+  static final now = DateTime.now();
+  DateTime selectedDate = now;
+  //DateTime pickedDate;
+  final moonLanding = DateTime.parse('1969-07-20 20:18:04Z');
+  final last = now.add(const Duration(days: 365));
 
   getIDUser() async {
     final prefs = await SharedPreferences.getInstance();
@@ -103,18 +106,16 @@ class _EventFormState extends State<EventForm> {
                       return null;
                     },
                   ),
-
-                  /*     CalendarDatePicker(
-                            initialDate: now,
-                            firstDate: now,
-                            lastDate: last,
-                            onDateChanged: (DateTime? value) {
-                              setState(() {
-                                selectedDate = value!;
-                              });
-                            },
-                  ), 
-                  */
+                  CalendarDatePicker(
+                    initialDate: now,
+                    firstDate: now,
+                    lastDate: last,
+                    onDateChanged: (DateTime? value) {
+                      setState(() {
+                        selectedDate = value!;
+                      });
+                    },
+                  ),
                   TextFormField(
                     controller: dateController,
                     decoration: const InputDecoration(
@@ -122,18 +123,17 @@ class _EventFormState extends State<EventForm> {
                       suffixIcon: Icon(Icons.calendar_today),
                     ),
                     //readOnly: true,
-                    onTap: () {
-                      //selectDatePiker(context);
-                      /*   CalendarDatePicker(
-                            initialDate: now,
-                            firstDate: now,
-                            lastDate: last,
-                            onDateChanged: (DateTime? value) {
-                              setState(() {
-                                selectedDate = value!;
-                              });
-                            },
-                     ); */
+                    onTap: () async {
+                      CalendarDatePicker(
+                        initialDate: now,
+                        firstDate: now,
+                        lastDate: last,
+                        onDateChanged: (DateTime? value) {
+                          setState(() {
+                            selectedDate = value!;
+                          });
+                        },
+                      );
                     },
                   ),
                   /*    */
@@ -197,20 +197,16 @@ class _EventFormState extends State<EventForm> {
                           Event event = Event(
                               titre: titreController.text,
                               description: descController.text,
-                              date: selectedDate,
+                              //date: selectedDate,
                               lieu: lieuController.text,
                               idCreateur: snapshot.data);
                           if (widget.task != null) {
                             // widget.tasksCollection
                             //     .update(widget.task!, myController.text, completed);
-                            message = "L'évenement " +
-                                event.titre! +
-                                " à été modifier !";
+                            message = "L'évenement à été modifier !";
                           } else {
                             // widget.tasksCollection.create(myController.text, completed);
-                            message = "L'évenement " +
-                                event.titre! +
-                                " à été créer !";
+                            message = "L'évenement à été créer !";
                           }
 
                           ScaffoldMessenger.of(context).showSnackBar(

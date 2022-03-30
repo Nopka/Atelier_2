@@ -41,7 +41,7 @@ dependencies:
   flutter_map: ^0.14.0
   latlong2: ^0.8.1
   shared_preferences: ^2.0.13
-
+  http: ^0.13.2
 
 dev_dependencies:
   flutter_test:
@@ -63,14 +63,14 @@ flutter:
 
 flutter_native_splash: # page de démarrage
   color: "#006064"
-  image: assets/splashscreen/icon.png
+  image: assets/images/group.png
 
 flutter_icons: # icon de l'application
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icon/icon.png"
+  image_path: "assets/images/group.png"
   adaptive_icon_background: "#006064"
-  adaptive_icon_foreground: "assets/icon/icon.png"
+  adaptive_icon_foreground: "assets/images/group.png"
 
 #flutter_native_splash:
 #  color: "#42a5f5"
