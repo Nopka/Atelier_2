@@ -136,17 +136,19 @@ class Profile extends StatelessWidget {
   _desc(desc) {
     return Row(children: <Widget>[
       _prefixIcon(Icons.description),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text('Description',
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 15.0,
-                  color: Colors.grey)),
-          const SizedBox(height: 1),
-          desc != null ? Text(desc) : const Text(''),
-        ],
+      Flexible(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Description',
+                style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15.0,
+                    color: Colors.grey)),
+            const SizedBox(height: 1),
+            desc != null ? Text(desc) : const Text(''),
+          ],
+        ),
       )
     ]);
   }
