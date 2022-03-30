@@ -26,16 +26,15 @@ class EventForm extends StatefulWidget {
   State<EventForm> createState() => _EventFormState();
 }
 
+//Model de données pour un objet "LatLong"
 class LatLong {
   double lat;
   double long;
 
-  // double get latitude => lat;
-  // double get longitude => long;
-
   LatLong({required this.lat, required this.long});
 }
 
+// Fonction asynchrone pour obtenir les coordonnées en fonction de l'ip
 Future<LatLong> getCurrentLocation() async {
   var dio = Dio();
   Response responseAPI = await dio.get("http://ip-api.com/json/");
@@ -114,7 +113,7 @@ class _EventFormState extends State<EventForm> {
                   TextFormField(
                     controller: lieuController,
                     decoration: const InputDecoration(
-                      hintText: "date",
+                      hintText: "date (AAAA-MM-JJ)",
                       suffixIcon: Icon(Icons.calendar_today),
                     ),
                     //readOnly: true,

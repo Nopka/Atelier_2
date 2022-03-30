@@ -109,8 +109,8 @@ class EventDetails extends StatelessWidget {
                     alignment: const Alignment(0, 0),
                     color: Colors.grey,
                     child: const Mapp(
-                      lat: 12.0,
-                      long: 14.0,
+                      lat: 48.741173,
+                      long: 1.954309,
                     ),
                   ),
                 ),
