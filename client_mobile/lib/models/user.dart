@@ -25,7 +25,7 @@ class User {
           options:
               Options(headers: <String, dynamic>{'Authorization': basicAuth}));
       if (response.statusCode == 200) {
-        //print(response.data);
+        print(response.data);
         List<dynamic> list = [
           {"access-token": response.data["access-token"]},
           {"refresh-token": response.data["refresh-token"]},
