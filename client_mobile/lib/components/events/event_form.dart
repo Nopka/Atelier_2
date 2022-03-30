@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:intl/intl.dart';
 import 'package:client_mobile/models/event.dart';
 import 'package:client_mobile/screens/home.dart';
 import 'package:flutter/material.dart';
