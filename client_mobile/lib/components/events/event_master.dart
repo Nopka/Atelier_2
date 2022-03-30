@@ -20,7 +20,7 @@ class TaskMaster extends StatelessWidget {
               children: [
                 Expanded(
                   child: ListTile(
-                    title: Text(events[index].titre),
+                    title: const Text(/* events[index].titre */'index'),
                     textColor: Colors.green,
                     onTap: () {
                       callbackSetTask(events[index]);

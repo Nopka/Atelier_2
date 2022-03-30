@@ -1,10 +1,14 @@
+//import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
 class Mapp extends StatelessWidget {
-  const Mapp({Key? key}) : super(key: key);
-
+  const Mapp({Key? key /* , required this.lag , required this.long  */}) : super(key: key);
+  /* final double lag;
+  final double long; */
+  //LatLng(40.71, -74.00)
   @override
   Widget build(BuildContext context) {
     return Stack(children: <Widget>[
@@ -19,7 +23,7 @@ class Mapp extends StatelessWidget {
               Marker(
                   width: 45.0,
                   height: 45.0,
-                  point: LatLng(40.73, -74.00),
+                  point: LatLng(40.71, -74.00),
                   builder: (context) => Container(
                         padding: const EdgeInsets.all(0),
                         child: IconButton(

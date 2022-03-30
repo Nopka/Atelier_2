@@ -1,8 +1,9 @@
 import 'package:client_mobile/components/events/event_details.dart';
 import 'package:client_mobile/data/events_collection.dart';
 import 'package:client_mobile/screens/create_event.dart';
-import 'package:client_mobile/screens/all_events.dart';
-import 'package:client_mobile/screens/navigation.dart';
+import 'package:client_mobile/screens/event.dart';
+import 'package:client_mobile/screens/home.dart';
+import 'package:client_mobile/screens/participants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,18 +25,19 @@ class Reunionou extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(fontFamily: 'Oswald'),
-        initialRoute: Navigation.route,
+        initialRoute: Home.route,
         routes: {
-           Navigation.route: (context) => const Navigation(
-               // title: 'Reunionou',
+          Home.route: (context) => const Home(
+              // title: 'Reunionou',
               ),
-          AllEvents.route: (context) => AllEvents(
-                title: 'Reunionou',
+          Event.route: (context) => const Event(
               ),
           CreateEvent.route: (context) =>
               const CreateEvent(title: 'Créer Events'),
           EventDetails.route: (context) =>
               const EventDetails(title: 'Event Details'),
+          Participants.route: (context) =>
+              const Participants(title: 'Participants'),
         });
   }
 }

@@ -20,7 +20,7 @@ class Profile extends StatelessWidget {
         padding: const EdgeInsets.all(0),
         child: SimpleElevatedButton(
           child: const Text("Se deconnecter"),
-          color: Colors.orange,
+          color: const Color.fromARGB(255, 43, 82, 21),
           onPressed: () {},
         ),
       )
@@ -37,7 +37,7 @@ class Profile extends StatelessWidget {
             style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 20.0,
-                color: Colors.orange)),
+                color: Colors.grey)),
       ]);
 
   _infoUser() {
@@ -90,7 +90,7 @@ class Profile extends StatelessWidget {
                   fontSize: 15.0,
                   color: Colors.grey)),
           SizedBox(height: 1),
-          Text('+91 0000000000')
+          Text('+33 0000000000')
         ],
       )
     ]);
@@ -148,7 +148,7 @@ class Profile extends StatelessWidget {
           child: Icon(
             iconData,
             size: 20,
-            color: Colors.grey,
+            color:const Color.fromARGB(255, 43, 82, 21),
           )),
     );
   }

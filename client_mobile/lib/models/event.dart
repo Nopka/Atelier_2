@@ -1,35 +1,36 @@
 import 'package:json_annotation/json_annotation.dart';
 
-//part 'task.g.dart';
+part 'event.g.dart';
 
 @JsonSerializable()
 class Event {
-  int? id;
+  String? id;
   String titre;
   String description;
-  DateTime date;
+  String? date;
   String lieu;
   String idCreateur;
   String? token;
-  DateTime? createdAt;
-  DateTime? updateAt;
+  String? createdAt;
+  String? updateAt;
 
   // Constructor, with syntactic sugar for assignment to members.
-  Event(
-      {this.id,
+  Event({
+      this.id,
       required this.titre,
       required this.description,
-      required this.date,
+      this.date,
       required this.lieu,
       required this.idCreateur,
       this.token,
       this.createdAt,
-      this.updateAt});
+      this.updateAt
+    });
 
   /// Connect the generated function to the `fromJson`
   /// factory.
-  //factory Event.fromJson(Map<String, dynamic> json) => _$TaskFromJson(json);
+  //factory Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);
 
   /// Connect the generated function to the `toJson` method.
-  //Map<String, dynamic> toJson() => _$TaskToJson(this);
+  //Map<String, dynamic> toJson() => _$EventToJson(this);
 }

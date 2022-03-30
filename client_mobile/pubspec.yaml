@@ -40,7 +40,7 @@ dependencies:
   responsive_grid: ^2.0.0
   flutter_map:
   latlong2: ^0.8.1
-
+  http: ^0.13.2
 
 dev_dependencies:
   flutter_test:
