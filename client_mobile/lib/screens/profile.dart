@@ -18,7 +18,7 @@ class Profile extends StatelessWidget {
       await prefs.remove('access-token');
       await prefs.remove('refresh-token');
       await prefs.remove('user');
-      return 'Toutes les données on était supprimer, vous allez être déconnecter !';
+      return 'Vous allez êtes déconnecter !';
     } catch (e) {
       return 'Problème lors de la suppression !';
     }

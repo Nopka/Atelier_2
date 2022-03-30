@@ -1,4 +1,7 @@
+import 'dart:convert';
+import 'package:intl/intl.dart';
 import 'package:client_mobile/models/event.dart';
+import 'package:client_mobile/screens/home.dart';
 import 'package:flutter/material.dart';
 import '../map.dart';
 import 'dart:async';
@@ -18,6 +21,40 @@ class EventForm extends StatefulWidget {
 
   final Event? task;
   //final Event tasksCollection;
+
+  Future<bool> addEvent(titre, desc, date, heure, lieu, idC) async {
+    try {
+      var dio = Dio(BaseOptions(responseType: ResponseType.plain));
+      dio.options.headers['content-Type'] = 'application/json';
+      dio.options.headers['Accept'] = 'application/json';
+
+      final prefs = await SharedPreferences.getInstance();
+      String data = prefs.getString('token') ?? '';
+      String auth = 'Bearer $data';
+      Response response = await dio.post(
+          "http://docketu.iutnc.univ-lorraine.fr:62364/events",
+          data: jsonEncode({
+            'titre': titre,
+            'description': desc,
+            'dateEvent': {'date': date, 'heure': heure},
+            'lieu': lieu,
+            'idCreateur': idC
+          }),
+          options: Options(headers: <String, dynamic>{'Authorization': auth}));
+      if (response.statusCode == 200) {
+        print('code 200');
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      // return [
+      //   {"message": "Ajout Impossible"}
+      // ];
+      return false;
+    }
+  }
 
   @override
   State<EventForm> createState() => _EventFormState();
@@ -49,7 +86,6 @@ class _EventFormState extends State<EventForm> {
   final titreController = TextEditingController();
   final descController = TextEditingController();
   final lieuController = TextEditingController();
-
   final heureController = TextEditingController();
   final dateController = TextEditingController();
 
@@ -106,34 +142,26 @@ class _EventFormState extends State<EventForm> {
                       return null;
                     },
                   ),
-                  CalendarDatePicker(
-                    initialDate: now,
-                    firstDate: now,
-                    lastDate: last,
-                    onDateChanged: (DateTime? value) {
-                      setState(() {
-                        selectedDate = value!;
-                      });
-                    },
-                  ),
+                  // CalendarDatePicker(
+                  //   initialDate: now,
+                  //   firstDate: now,
+                  //   lastDate: last,
+                  //   onDateChanged: (DateTime? value) {
+                  //     setState(() {
+                  //       selectedDate = value!;
+                  //     });
+                  //   },
+                  // ),
                   TextFormField(
                     controller: dateController,
                     decoration: const InputDecoration(
-                      hintText: "date (AAAA-MM-JJ)",
-                      suffixIcon: Icon(Icons.calendar_today),
+                      hintText: "date (DD-MM-YYYY)",
                     ),
-                    //readOnly: true,
-                    onTap: () async {
-                      CalendarDatePicker(
-                        initialDate: now,
-                        firstDate: now,
-                        lastDate: last,
-                        onDateChanged: (DateTime? value) {
-                          setState(() {
-                            selectedDate = value!;
-                          });
-                        },
-                      );
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Veuillez rentrez une valeur correcte';
+                      }
+                      return null;
                     },
                   ),
                   /*    */
@@ -193,26 +221,29 @@ class _EventFormState extends State<EventForm> {
                         // Validate returns true if the form is valid, or false otherwise.
                         if (_formKey.currentState!.validate()) {
                           String message = "";
-                          //print(snapshot.data);
-                          Event event = Event(
-                              titre: titreController.text,
-                              description: descController.text,
-                              //date: selectedDate,
-                              lieu: lieuController.text,
-                              idCreateur: snapshot.data);
-                          if (widget.task != null) {
-                            // widget.tasksCollection
-                            //     .update(widget.task!, myController.text, completed);
-                            message = "L'évenement à été modifier !";
-                          } else {
-                            // widget.tasksCollection.create(myController.text, completed);
-                            message = "L'évenement à été créer !";
-                          }
-
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(message)),
-                          );
-                          Navigator.pop(context);
+                          // print(
+                          //     dateController.text + '' + heureController.text);
+                          Future<bool> resp = widget.addEvent(
+                              titreController.text,
+                              descController.text,
+                              dateController.text,
+                              heureController.text,
+                              lieuController.text,
+                              snapshot.data);
+                          resp.then((data) {
+                            if (widget.task != null && (data != false)) {
+                              // widget.tasksCollection
+                              //     .update(widget.task!, myController.text, completed);
+                              message = "L'évenement à étés modifier !";
+                            } else {
+                              // widget.tasksCollection.create(myController.text, completed);
+                              message = "L'évenement à été créer !";
+                            }
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(message)),
+                            );
+                            Navigator.pushNamed(context, Home.route);
+                          });
                         }
                       },
                       child: const Text('Submit'),
