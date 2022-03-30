@@ -36,7 +36,7 @@ class Participants extends StatelessWidget {
                   subtitle: Text('guest'),
                   leading: Icon(
                     Icons.person,
-                    color: Colors.deepPurple,
+                    color: Colors.black,
                   ),
                 )
               ],
@@ -56,7 +56,7 @@ class Participants extends StatelessWidget {
                   subtitle: Text('guest'),
                   leading: Icon(
                     Icons.person,
-                    color: Colors.deepPurple,
+                    color: Colors.black,
                   ),
                 )
               ],
