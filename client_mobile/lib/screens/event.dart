@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../components/events/event_details.dart';
 import '../data/events_collection.dart';
+<<<<<<< HEAD
 // import 'package:client_mobile/models/event.dart' as event_data;
+=======
+>>>>>>> 6b0e63b0f59327b4fd15cc31564e8c73c1aecae8
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Event extends StatefulWidget {
@@ -98,20 +101,6 @@ class _EventState extends State<Event> {
                         ),
                       ),
                     );
-                    /*  ListTile(
-                      title: Text(snapshot.data[index].titre),
-                      subtitle: Text(snapshot.data[index].lieu),
-                    /*   leading: const Icon(
-                        Icons.person,
-                        color: Colors.deepPurple,
-                      ), */
-                      trailing: TextButton(
-                        child: const Text('voir plus'),
-                        onPressed: () {
-                          Navigator.pushNamed(context, EventDetails.route);
-                        },
-                      ),
-                    ); */
                   },
                 ),
               );
