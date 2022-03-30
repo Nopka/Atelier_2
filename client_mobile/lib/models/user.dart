@@ -25,14 +25,13 @@ class User {
           options:
               Options(headers: <String, dynamic>{'Authorization': basicAuth}));
       if (response.statusCode == 200) {
-        print(response.data);
         List<dynamic> list = [
-          {"access-token": response.data["access-token"]},
+          {"token": response.data["token"]},
           {"refresh-token": response.data["refresh-token"]},
           {"user": response.data["user"]}
         ];
-        if (response.data["access-token"] != null) {
-          await prefs.setString('access-token', response.data["access-token"]);
+        if (response.data["token"] != null) {
+          await prefs.setString('token', response.data["token"]);
         }
         if (response.data["refresh-token"] != null) {
           await prefs.setString(
