@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:client_mobile/screens/participants.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_grid/responsive_grid.dart';
@@ -32,14 +30,14 @@ class EventDetails extends StatefulWidget {
       final _prefs = await SharedPreferences.getInstance();
       List<String> _data = _prefs.getStringList('user') ?? [];
       var idUser = _data[0];
-      print('event '+idEvent);
-      print('id '+idUser);
+      print('event ' + idEvent);
+      print('id ' + idUser);
 
       var response = await dio.get(url,
           options: Options(headers: <String, dynamic>{'Authorization': auth}));
-      
+
       for (var participation in response.data['resultat']) {
-        print('p id '+participation['idUser']);
+        print('p id ' + participation['idUser']);
         if (participation['idUser'] == idUser) {
           print('okokokokokkokokokokokokoko');
         }
