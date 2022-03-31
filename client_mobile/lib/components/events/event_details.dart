@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:client_mobile/screens/participants.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_grid/responsive_grid.dart';
@@ -14,35 +16,51 @@ class EventDetails extends StatefulWidget {
 
   static String get route => '/event_details';
 
-  invitation(String resp, String idEvent) async {
+  invitation(String resp) async {
     try {
-      String url =
-          "http://docketu.iutnc.univ-lorraine.fr:62364/events/participations/" +
-              idEvent;
-      Dio dio = Dio();
+      final prefs = await SharedPreferences.getInstance();
+      List<String> _data = prefs.getStringList('user') ?? [];
+      var idUser = _data[0];
+      String url = "http://docketu.iutnc.univ-lorraine.fr:62364/users/" +
+          idUser +
+          "/invitations";
+      Dio dio = Dio(/*BaseOptions(responseType: ResponseType.plain)*/);
       dio.options.headers['content-Type'] = 'application/json';
       dio.options.headers['Accept'] = 'application/json';
 
-      final prefs = await SharedPreferences.getInstance();
       String data = prefs.getString('token') ?? '';
       String auth = 'Bearer $data';
 
-      final _prefs = await SharedPreferences.getInstance();
-      List<String> _data = _prefs.getStringList('user') ?? [];
-      var idUser = _data[0];
-      print('event ' + idEvent);
-      print('id ' + idUser);
+      //print('event ' + idEvent);
+      //print('id ' + idUser);
 
       var response = await dio.get(url,
           options: Options(headers: <String, dynamic>{'Authorization': auth}));
 
-      for (var participation in response.data['resultat']) {
-        print('p id ' + participation['idUser']);
-        if (participation['idUser'] == idUser) {
-          print('okokokokokkokokokokokokoko');
-        }
-      }
       if (response.statusCode == 200) {
+        for (var invitation in response.data['invitations']) {
+          //print('p id ' + invitation['idUser']);
+          if (invitation['idUser'] == idUser) {
+            print("USER TROUVE");
+            String urlUpdate =
+                'http://docketu.iutnc.univ-lorraine.fr:62364/invitations/' +
+                    invitation["id"];
+            try {
+              var responseUpdate = await dio.put(urlUpdate,
+                  options: Options(
+                      headers: <String, dynamic>{'Authorization': auth}),
+                  data: jsonEncode({"response": resp}));
+              //print(response_update.data);
+              if (responseUpdate.statusCode == 200) {
+                print(responseUpdate);
+              } else {
+                print("ddd");
+              }
+            } catch (e) {
+              print(e);
+            }
+          }
+        }
         return 'votre réponse a été envoyé avec succès';
       } else {
         return 'reponse non enregistrée';
@@ -65,16 +83,21 @@ class LatLong {
 
 Future<LatLong> getEventLocation(String address) async {
   var dio = Dio();
-  Response responseAPI = await dio.get(
-      "https://api.geoapify.com/v1/geocode/search?text=" +
-          address +
-          "&apiKey=feb8d3c41d7747c7a7cd3b367fb9c161");
-  if (responseAPI.statusCode == 200) {
-    return LatLong(
-        lat: responseAPI.data['features'][0]['properties']['lat'],
-        long: responseAPI.data['features'][0]['properties']['lon']);
-  } else {
-    throw Exception('Failed to fetch your location');
+  try {
+    Response responseAPI = await dio.get(
+        "https://api.geoapify.com/v1/geocode/search?text=" +
+            address +
+            "&apiKey=feb8d3c41d7747c7a7cd3b367fb9c161");
+    if (responseAPI.statusCode == 200) {
+      return LatLong(
+          lat: responseAPI.data['features'][0]['properties']['lat'],
+          long: responseAPI.data['features'][0]['properties']['lon']);
+    } else {
+      throw Exception('Failed to fetch your location');
+    }
+  } catch (e) {
+    print(e);
+    return LatLong(lat: 0, long: 0);
   }
 }
 
@@ -205,8 +228,13 @@ class _EventDetailsState extends State<EventDetails> {
                                   // color: Colors.green,
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      widget.invitation(
-                                          'oui', snapshot.data[args].id);
+                                      widget.invitation('oui');
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                            content:
+                                                Text("Vous avez répondu oui.")),
+                                      );
                                     },
                                     style: ElevatedButton.styleFrom(
                                       primary: Colors.green,
@@ -227,8 +255,13 @@ class _EventDetailsState extends State<EventDetails> {
                                   //color: Colors.red,
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      widget.invitation(
-                                          'non', snapshot.data['id']);
+                                      widget.invitation('non');
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                            content:
+                                                Text("Vous avez répondu non.")),
+                                      );
                                     },
                                     style: ElevatedButton.styleFrom(
                                       primary: Colors.red,
@@ -302,7 +335,8 @@ class _EventDetailsState extends State<EventDetails> {
                                   child: ElevatedButton(
                                     onPressed: () {
                                       Navigator.pushNamed(
-                                          context, Participants.route);
+                                          context, Participants.route,
+                                          arguments: snapshot.data[args].id);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       primary: Colors.green,
